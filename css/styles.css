@@ -1,4 +1,5 @@
 :root{
+    /* Color Scheme */
     --color-bg: #EACDC2;
     --color-surface: #ffffff;
     --color-primary: #1A1423;
@@ -7,5 +8,21 @@
     --color-text-muted: #774C60;
     --color-accent: #B75D69;
     --color-border: #ddd;
+
+    /* Font Family */
+    --font-main: "Inter", Arial, sans-serif;
+    --font-heading: "Poppins", Arial, sans-serif;
+
+    /* Font Size */
+    --font-size-small: 0.85rem;
+    --font-size-body: 1rem;
+    --font-size-title: 1.6rem;
+    --font-size-hero: 2.5rem;
+
+    /* Font Weight */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
 }
+
 
