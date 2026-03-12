@@ -154,7 +154,11 @@ input:focus{
     color: var(--color-accent);
 }
 
-
+.feed-header{
+    font-family: var(--font-heading);
+    padding: var(--spacing-md);
+    text-align: center;
+}
 
 
 /* Tablet View */
