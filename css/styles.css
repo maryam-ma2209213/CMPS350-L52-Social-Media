@@ -156,10 +156,12 @@ input:focus {
     color: var(--color-accent);
 }
 
+/* Feed Section */
 .feed-header {
     font-family: var(--font-heading);
     padding: var(--spacing-md);
     text-align: center;
+    font-size: var(--font-size-title)
 }
 
 .feed-section {
@@ -169,29 +171,59 @@ input:focus {
 
 .feed-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin: var(--spacing-md)
+    justify-content: center;
+    grid-template-columns: minmax(200px, 1fr);
+    gap: 25px;
+    margin: var(--spacing-md)  
 }
 
 .feed-card {
     background-color: var(--color-surface);
     padding-left: var(--spacing-lg);
     padding-right: var(--spacing-lg);
-    padding-bottom: 10rem;
+    padding-bottom: var(--spacing-md);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.post-top img{
+    margin-top: 25px;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user{
+    display: flex;
+    gap: 8px;
 }
 
 .post-top {
     display: flex;
     justify-content: space-between;
+    padding-top: var(--spacing-sm);
 }
 
 .post-owner,
 .following {
-    font: var(--font-size-small);
+    font-size: var(--font-size-small);
 }
+
+.post-content{
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    height: auto;
+    padding-bottom: var(--spacing-sm);
+}
+.post-content img{
+    width: 100%;
+}
+
 
 /* Comment Section */
 .comment-section {
