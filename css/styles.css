@@ -42,6 +42,50 @@
   --spacing-xl: 32px;
 }
 
+:root {
+  /* Color Scheme */
+  --color-bg: #eacdc2;
+  --color-surface: #ffffff;
+  --color-primary: #1a1423;
+  --color-secondary: #372549;
+  --color-text-main: #1a1423;
+  --color-text-muted: #774c60;
+  --color-accent: #b75d69;
+  --color-border: #ddd;
+
+  /* Font Family */
+  --font-main: "Inter", Arial, sans-serif;
+  --font-heading: "Poppins", Arial, sans-serif;
+
+  /* Font Size */
+  --font-size-small: 0.85rem;
+  --font-size-body: 1rem;
+  --font-size-title: 1.6rem;
+  --font-size-section: 2.5rem;
+
+  /* Font Weight */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* From our Assignment 1 */
+  /* Box Shadow */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 10px rgba(0, 0, 0, 0.15);
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* Spacing for Padding and Margin */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
 html body {
   max-width: 100%;
 }
@@ -86,12 +130,24 @@ h3 {
   font-family: var(--font-heading);
 }
 
-.form-card {
+/* .form-card {
   background-color: var(--color-surface);
   padding: var(--spacing-lg);
   margin: var(--spacing-lg);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
+} */
+
+.form-card{
+    padding:40px;
+    margin: var(--spacing-xl);
+    border-radius:20px;
+    background: rgba(255,255,255,0.08);
+    /* Translucent Glass appearance */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
 }
 
 .form-header {
@@ -115,15 +171,33 @@ h3 {
   gap: 18px;
 }
 
-input {
+/* input {
   padding: var(--spacing-sm);
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
+} */
+
+input {
+    background: rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.2);
+    color:white;
+    padding:12px;
+    border-radius:10px;
 }
 
-input:focus {
+input::placeholder{
+    color: var(--color-text-muted);
+}
+
+/* input:focus {
   outline: none;
   border-color: var(--color-accent);
+} */
+
+input:focus{
+    outline:none;
+    border-color: var(--color-accent);
+    background: rgba(255,255,255,0.15);
 }
 
 .login-btn {
@@ -131,7 +205,7 @@ input:focus {
   padding: var(--spacing-xs);
   border-radius: var(--radius-md);
   border: none;
-  border: 1px solid var(--color-border);
+  /* border: 1px solid var(--color-text-muted); */
   box-shadow: var(--shadow-md);
 
   background: linear-gradient(
