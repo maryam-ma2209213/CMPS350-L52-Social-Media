@@ -369,9 +369,18 @@ input:focus{
 }
 
 /* Edit Profile Form */
+.edit-profile-body {
+  background: var(--color-bg);
+  /* background-image: linear-gradient(
+    -25deg,
+    var(--color-bg),
+    var(--color-accent),
+    var(--color-text-muted)
+  ); */
+}
 #edit-prof-h2 {
   margin: 1.5rem;
-  color: var(--color-primary);
+  color: var(--color-surface);
 }
 
 input,
@@ -379,27 +388,61 @@ button,
 textarea,
 select {
   font-family: inherit;
+  font-style: oblique;
+  margin-left: 1.5rem;
+  padding: inherit;
 }
 
+.edit-profile-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
 .edit-profile-form {
   width: 70%;
-  border: 1.5px solid var(--color-text-muted);
-  background: var(--color-bg);
+  /* background: var(--color-bg); */
+  background-image: linear-gradient(
+    -25deg,
+    var(--color-bg),
+    var(--color-accent),
+    var(--color-text-muted)
+  );
   box-shadow: var(--shadow-sm);
   border-radius: var(--radius-sm);
   overflow: hidden;
   margin: 1rem auto;
   max-width: 1200px;
 }
+
 .edit-profile-fieldset {
+  border: none;
   border-radius: 4px;
-  margin: 1rem;
   padding: 1rem;
 }
 
-.edit-profile-form input {
+.edit-profile-form label,
+input,
+textarea {
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
   padding: var(--spacing-sm);
   margin-top: var(--spacing-sm);
+  margin: var(--spacing-sm);
+}
+
+.profile-pic-div,
+.username-div,
+.about-you-div,
+.gender-div {
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  /* border: 1px solid var(--color-border); */
+  color: var(--color-surface);
+  font-style: oblique;
 }
 
 .submit-btn {
@@ -407,7 +450,7 @@ select {
   border-style: none;
   margin: 1rem 0.25rem;
   margin-left: 1rem;
-  padding: 0.3rem 0.75rem;
+  padding: 0.4rem 1rem;
   border-radius: 4px;
   background-color: var(--color-accent);
 }
