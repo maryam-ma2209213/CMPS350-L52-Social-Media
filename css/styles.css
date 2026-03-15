@@ -111,11 +111,9 @@ h3 {
   align-items: center;
   justify-content: center;
   color: white;
-  background: linear-gradient(
-    125deg,
-    var(--color-primary),
-    var(--color-secondary)
-  );
+  background: linear-gradient(125deg,
+      var(--color-primary),
+      var(--color-secondary));
 }
 
 .banner-content {
@@ -209,11 +207,9 @@ input:focus {
   /* border: 1px solid var(--color-text-muted); */
   box-shadow: var(--shadow-md);
 
-  background: linear-gradient(
-    125deg,
-    var(--color-text-muted),
-    var(--color-secondary)
-  );
+  background: linear-gradient(125deg,
+      var(--color-text-muted),
+      var(--color-secondary));
   color: white;
 
   font-size: var(--font-size-small);
@@ -303,57 +299,71 @@ input:focus {
   height: auto;
   padding-bottom: var(--spacing-sm);
 }
+
 .post-content img {
   width: 100%;
 }
 
 /* Create Post Section */
-.cpost-header{
+.cpost-header {
   font-size: var(--font-size-body);
   padding: var(--spacing-md);
-  text-align: center;  
+  text-align: center;
 }
-.mem-pic{
+
+.mem-pic {
   display: flex;
   justify-content: start;
 }
-.mem-pic img{
+
+.mem-pic img {
   width: 70px;
   height: 70px;
   object-fit: cover;
 }
-.mem-pic p{
+
+.mem-pic p {
   margin-top: 20px;
   font-size: var(--font-size-body);
 }
-.mem-line{
+
+.mem-line {
   display: flex;
   justify-content: start;
 }
-.mem-line img{
+
+.mem-line img {
   width: 70px;
   height: 70px;
   object-fit: cover;
 }
-.mem-line p{
+
+.mem-line p {
   margin-top: 20px;
   font-size: var(--font-size-body);
 }
-.sides{
+
+.sides {
   padding-top: var(--spacing-lg);
 }
-.memory{
+
+.memory {
   display: flex;
   gap: 50px;
   padding: var(--spacing-md)
 }
-.memory .feed-card h6{
+
+.memory .feed-card h6 {
   color: grey;
 }
 
 
 
 /* Comment Section */
+.hidden {
+  display: none;
+}
+
 .comment-section {
   background-color: var(--color-secondary);
   padding: var(--spacing-xs);
@@ -425,6 +435,7 @@ input:focus {
     var(--color-text-muted)
   ); */
 }
+
 #edit-prof-h2 {
   margin: 1.5rem;
   color: var(--color-surface);
@@ -464,18 +475,17 @@ option:not([value=""]) {
   width: 100%;
   margin: 0 auto;
 }
+
 .edit-profile-form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 70%;
-  background-image: linear-gradient(
-    -25deg,
-    var(--color-bg),
-    var(--color-accent),
-    var(--color-text-muted)
-  );
+  background-image: linear-gradient(-25deg,
+      var(--color-bg),
+      var(--color-accent),
+      var(--color-text-muted));
   box-shadow: var(--shadow-sm);
   border-radius: var(--radius-sm);
   overflow: hidden;
@@ -530,8 +540,7 @@ textarea {
 }
 
 /* Tablet View */
-@media (min-width: 768px) {
-}
+@media (min-width: 768px) {}
 
 /* Desktop View */
 @media (min-width: 1025px) {
@@ -539,12 +548,14 @@ textarea {
     display: flex;
     min-height: 100vh;
   }
+
   .auth-section {
     flex: 0.5;
     justify-content: center;
     align-items: center;
     padding: var(--spacing-xl);
   }
+
   .form-section,
   .register-section {
     flex: 1;
@@ -552,13 +563,16 @@ textarea {
     justify-content: center;
     align-items: center;
   }
+
   .form-card {
     max-width: 400px;
     width: 100%;
   }
+
   .platform-name {
     font-size: 3rem;
   }
+
   .platform-slogan {
     font-size: 1.3rem;
   }
