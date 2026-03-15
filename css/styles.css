@@ -307,6 +307,52 @@ input:focus {
   width: 100%;
 }
 
+/* Create Post Section */
+.cpost-header{
+  font-size: var(--font-size-body);
+  padding: var(--spacing-md);
+  text-align: center;  
+}
+.mem-pic{
+  display: flex;
+  justify-content: start;
+}
+.mem-pic img{
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+.mem-pic p{
+  margin-top: 20px;
+  font-size: var(--font-size-body);
+}
+.mem-line{
+  display: flex;
+  justify-content: start;
+}
+.mem-line img{
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+.mem-line p{
+  margin-top: 20px;
+  font-size: var(--font-size-body);
+}
+.sides{
+  padding-top: var(--spacing-lg);
+}
+.memory{
+  display: flex;
+  gap: 50px;
+  padding: var(--spacing-md)
+}
+.memory .feed-card h6{
+  color: grey;
+}
+
+
+
 /* Comment Section */
 .comment-section {
   background-color: var(--color-secondary);
