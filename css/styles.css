@@ -349,14 +349,42 @@ input:focus {
 
 .memory {
   display: flex;
-  gap: 50px;
+  gap: 20px;
   padding: var(--spacing-md)
 }
 
-.memory .feed-card h6 {
+.memory .feed-card h6, article p{
   color: grey;
 }
 
+.memory{
+  padding-top: var(--spacing-xl);
+}
+.memory .feed-card{
+  width: 50%;
+
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+}
+#submit, #reset{
+  background-color:#774c60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  height: 4.5vh;
+}
+
+#submit:hover , #reset:hover{
+  background-color: #cd98b0;
+}
 
 
 /* Comment Section */
