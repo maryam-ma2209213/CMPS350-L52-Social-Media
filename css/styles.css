@@ -283,8 +283,13 @@ input:focus {
 
 .post-top {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
   padding-top: var(--spacing-sm);
+}
+
+.following{
+  margin-left: auto;
 }
 
 .post-owner,
@@ -353,7 +358,7 @@ input:focus {
   padding: var(--spacing-md)
 }
 
-.memory .feed-card h6, article p{
+.memory .feed-card h6{
   color: grey;
 }
 
@@ -362,7 +367,11 @@ input:focus {
 }
 .memory .feed-card{
   width: 50%;
-
+}
+#caption{
+  position: absolute;
+  margin-top: 75px;
+  width: 35%;
 }
 
 .buttons{
