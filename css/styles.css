@@ -288,7 +288,7 @@ input:focus {
   padding-top: var(--spacing-sm);
 }
 
-.following{
+.following {
   margin-left: auto;
 }
 
@@ -308,6 +308,40 @@ input:focus {
 .post-content img {
   width: 100%;
 }
+
+.likeBtn {
+  width: 45px;
+  height: 40px;
+  margin-top: -3px;
+}
+
+.liked {
+  width: 25px;
+  height: 22px;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.btn {
+  /* c1 */
+  /* width: 45px;
+  height: 45px; */
+  /* c2 */
+  /* width: 38px; */
+  /* c4 */
+  width:25px ;
+  height: 25px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.bar {
+  display: flex;
+  justify-content: space-between;
+  height: 25px;
+}
+
+
 
 /* Create Post Section */
 .cpost-header {
@@ -358,31 +392,35 @@ input:focus {
   padding: var(--spacing-md)
 }
 
-.memory .feed-card h6{
+.memory .feed-card h6 {
   color: grey;
 }
 
-.memory{
+.memory {
   padding-top: var(--spacing-xl);
 }
-.memory .feed-card{
+
+.memory .feed-card {
   width: 50%;
 }
-#caption{
+
+#caption {
   position: absolute;
   margin-top: 75px;
   width: 35%;
 }
 
-.buttons{
+.buttons {
   display: flex;
   flex-direction: row;
   gap: 20px;
   justify-content: center;
   margin-top: var(--spacing-xl);
 }
-#submit, #reset{
-  background-color:#774c60;
+
+#submit,
+#reset {
+  background-color: #774c60;
   color: white;
   border: none;
   border-radius: 4px;
@@ -391,7 +429,8 @@ input:focus {
   height: 4.5vh;
 }
 
-#submit:hover , #reset:hover{
+#submit:hover,
+#reset:hover {
   background-color: #cd98b0;
 }
 
@@ -403,10 +442,10 @@ input:focus {
 
 .comment-section {
   background-color: var(--color-secondary);
-  padding: var(--spacing-xs);
+  padding: 2px;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
-  margin: 2px 50px;
+  margin-top: 13px;
 }
 
 .comment-box {
@@ -420,7 +459,7 @@ input:focus {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  height: 135px;
+  height: 100px;
 
   &::-webkit-scrollbar {
     display: none;
