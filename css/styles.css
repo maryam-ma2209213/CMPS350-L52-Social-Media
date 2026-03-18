@@ -42,50 +42,6 @@
   --spacing-xl: 32px;
 }
 
-:root {
-  /* Color Scheme */
-  --color-bg: #eacdc2;
-  --color-surface: #ffffff;
-  --color-primary: #1a1423;
-  --color-secondary: #372549;
-  --color-text-main: #1a1423;
-  --color-text-muted: #774c60;
-  --color-accent: #b75d69;
-  --color-border: #ddd;
-
-  /* Font Family */
-  --font-main: "Inter", Arial, sans-serif;
-  --font-heading: "Poppins", Arial, sans-serif;
-
-  /* Font Size */
-  --font-size-small: 0.85rem;
-  --font-size-body: 1rem;
-  --font-size-title: 1.6rem;
-  --font-size-section: 2.5rem;
-
-  /* Font Weight */
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
-
-  /* From our Assignment 1 */
-  /* Box Shadow */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 10px rgba(0, 0, 0, 0.15);
-
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-
-  /* Spacing for Padding and Margin */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-}
-
 html,
 body {
   max-width: 100%;
@@ -167,7 +123,7 @@ h3 {
 .forms {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--spacing-md);
 }
 
 /* input {
@@ -177,11 +133,14 @@ h3 {
 } */
 
 input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: var(--font-size-body);
+
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  padding: 12px;
-  border-radius: 10px;
 }
 
 input::placeholder {
@@ -199,6 +158,15 @@ input:focus {
   background: rgba(255, 255, 255, 0.15);
 }
 
+.input-style {
+  width: 100%;
+}
+
+.input-style input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .login-btn {
   margin-top: var(--spacing-sm);
   padding: var(--spacing-xs);
@@ -214,6 +182,8 @@ input:focus {
 
   font-size: var(--font-size-small);
   cursor: pointer;
+  width: 100%;
+  padding: 12px;
 }
 
 .login-btn:hover {
@@ -518,9 +488,9 @@ input:focus {
 }
 
 #profile-pic,
-#username,
-#about-you,
-#gender {
+.edit-profile-form #username,
+.edit-profile-form #about-you,
+.edit-profile-form #gender{
   font-family: inherit;
   font-style: oblique;
   margin-left: 1.5rem;
@@ -536,7 +506,7 @@ option:not([value=""]) {
   background-color: var(--color-accent);
 }
 
-#username::placeholder,
+.edit-profile-form #username::placeholder,
 #profile-pic,
 #about-you {
   color: var(--color-surface);
@@ -577,8 +547,8 @@ option:not([value=""]) {
 }
 
 .edit-profile-form label,
-input,
-textarea {
+.edit-profile-form input,
+.edit-profile-form textarea{
   font-weight: 700;
   display: flex;
   flex-direction: column;
