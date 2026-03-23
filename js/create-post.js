@@ -16,7 +16,7 @@
 //     }
 // });
 
-const write = document.getElementById("writeTrigger");
+const write = document.querySelector(".fa-solid");
 const caption = document.getElementById("caption");
 const postCaption = document.getElementById("postCaption");
 
