@@ -377,10 +377,19 @@ input:focus {
 }
 
 #caption {
-  position: absolute;
-  margin-top: 75px;
-  width: 35%;
+  /* margin-top: 75px; */
+  width: 80%;
+  /* max-width: 500px; */
+  text-align: center;
+  color: #1a1423;
+  border-radius: var(--spacing-sm);
+  border-color: #cd98b0;
 }
+#caption:focus {
+  border-color: #cd98b0; 
+  outline: none;
+}
+
 
 .buttons {
   display: flex;
@@ -404,6 +413,12 @@ input:focus {
 #submit:hover,
 #reset:hover {
   background-color: #cd98b0;
+}
+
+#postCaption{
+  display: flex;
+  justify-content: center;
+  margin: var(--spacing-md);
 }
 
 /* Comment Section */
