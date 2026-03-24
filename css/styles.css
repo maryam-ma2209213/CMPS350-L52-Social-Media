@@ -54,7 +54,9 @@ body {
   font-size: var(--font-size-body);
   color: var(--color-text-main);
 }
-
+main {
+  margin-left: 70px;
+}
 h1,
 h2,
 h3 {
@@ -230,6 +232,7 @@ input:focus {
   grid-template-columns: minmax(200px, 1fr);
   gap: 25px;
   margin: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
 }
 
 .feed-card {
@@ -283,7 +286,12 @@ input:focus {
 }
 
 .post-content img {
-  width: 100%;
+  width: 80%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .likeBtn {
@@ -337,8 +345,9 @@ input:focus {
 }
 
 .mem-pic p {
+  padding-left: 100px;
   margin-top: 20px;
-  font-size: var(--font-size-body);
+  font-size: 120%;
 }
 
 .mem-line {
@@ -346,12 +355,12 @@ input:focus {
   justify-content: start;
 }
 
-/* .mem-line img {
+.mem-line img {
   width: 60px;
   height: 70px;
   object-fit: cover;
   margin-left: var(--spacing-lg);
-} */
+}
 
 .mem-line p {
   padding-left: 100px;
@@ -753,6 +762,14 @@ option:not([value=""]) {
 
 .side .page-links .fa-solid {
   width: 100%;
+}
+
+/* PopUp */
+.popUpmsg {
+  color: #372549;
+  font-size: var(--font-size-title);
+  display: flex; 
+  justify-content: center; 
 }
 
 /* Logout button style */

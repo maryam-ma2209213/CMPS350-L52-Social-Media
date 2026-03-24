@@ -1,22 +1,23 @@
-// const trigger = document.getElementById("attachTrigger");
-// const picInput = document.getElementById("pictureUpload");
-// const postPic = document.getElementById("postPicture");
+const trigger = document.querySelector(".attachTrigger");
+const picInput = document.getElementById("pictureUpload");
+const postPic = document.getElementById("postPicture");
 
-// trigger.addEventListener("click", function() {
-//     picInput.click();
-// });
-// picInput.addEventListener("change", function() {
-//     const file = picInput.files[0];
-//     if(file){
-//         const reader = new FileReader();
-//         reader.onload = function(event){
-//             postPic.src = event.target.result;
-//         }
-//         reader.readAsDataURL(file);
-//     }
-// });
+trigger.addEventListener("click", function() {
+    picInput.click();
+});
 
-const write = document.querySelector(".fa-solid");
+picInput.addEventListener("change", function() {
+    const file = picInput.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(event){
+            postPic.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+const write = document.querySelector(".mem-line p");
 const caption = document.getElementById("caption");
 const postCaption = document.getElementById("postCaption");
 
@@ -24,6 +25,7 @@ write.addEventListener("click", function() {
     caption.style.display = "block";
     caption.focus();
 });
+
 caption.addEventListener("input", function () {
   caption.style.height = "auto";
   caption.style.height = caption.scrollHeight + "px";
@@ -40,7 +42,7 @@ resetBtn.addEventListener('click',function () {
 
 function savePost(){
     const captionText = caption.value;
-    let posts = JSON.parse(localStorage.getItem("posts"));
+    const postImage = postPic.src.includes("emptypfp.jpg") ? null : postPic.src;    let posts = JSON.parse(localStorage.getItem("posts"));
     if (posts === null) {
         posts = [];
     }
@@ -54,6 +56,7 @@ function savePost(){
     const newPost = {
         id: lastId + 1,
         text: captionText,
+        image: postImage,
         user: "Username",
         time: new Date().toLocaleString()
     };
@@ -61,5 +64,11 @@ function savePost(){
     localStorage.setItem("posts", JSON.stringify(posts));
     localStorage.setItem("lastPostId", newPost.id);
     caption.value = "";
+    postPic.src = "/media/emptypfp.jpg";
 }
 
+const savedPfp = localStorage.getItem("userProfilePic");
+if (savedPfp) {
+    const userPfps = document.querySelectorAll(".userPfpImage");
+    userPfps.forEach(img => img.src = savedPfp);
+}
