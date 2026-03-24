@@ -617,7 +617,6 @@ option:not([value=""]) {
 }
 
 /* For profile.html */
-
 .username-div,
 .profile-pic-div {
   margin-left: 4.5rem;
@@ -648,8 +647,9 @@ option:not([value=""]) {
   gap: 10px;
   margin: auto;
   padding: 10px;
+  padding-bottom: 70px;
 }
-
+/* unedited ver */
 .user-posts-div .post {
   background-color: var(--color-surface);
   padding: 1.5rem 1rem;
@@ -672,6 +672,102 @@ option:not([value=""]) {
   object-fit: cover;
   aspect-ratio: 1 / 1;
 }
+/* end of unedited */
+
+/* construction site start */
+
+/* posts in polaroid style */
+.user-posts-div .post {
+  background-color: #fdf8f2;
+  padding: 0.75rem 0.75rem 2.5rem 0.75rem;
+  border-radius: 2px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.18),
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  width: 70%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: visible;
+  /* rotation for a more realistic look */
+  transform: rotate(var(--post-rotate, -1deg));
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  cursor: pointer;
+}
+/* random rotations so posts look scattered */
+.user-posts-div .post:nth-child(odd) {
+  --post-rotate: -1.5deg;
+}
+.user-posts-div .post:nth-child(even) {
+  --post-rotate: 1.2deg;
+}
+.user-posts-div .post:nth-child(3n) {
+  --post-rotate: -0.5deg;
+}
+.user-posts-div .post:nth-child(4n) {
+  --post-rotate: 2deg;
+}
+
+.user-posts-div .post::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 48px;
+  height: 18px;
+  background: rgba(255, 235, 180, 0.72);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+/* hover straightens the post */
+.user-posts-div .post:hover {
+  transform: rotate(0deg) translateY(-4px) scale(1.03);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.22),
+    0 4px 10px rgba(0, 0, 0, 0.14);
+  z-index: 10;
+}
+/* to show likes and comments counts */
+.user-posts-div .post .post-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.user-posts-div .post:hover .post-overlay {
+  opacity: 1;
+}
+
+.post-overlay .overlay-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+
+.post-overlay .overlay-stat span {
+  font-size: 1rem;
+}
+
+/* construction site end */
 
 /* for other-profile.html */
 .follow-btn,
@@ -759,7 +855,6 @@ option:not([value=""]) {
   margin: 20px 0;
 }
 
-
 .side .page-links .fa-solid {
   width: 100%;
 }
@@ -768,8 +863,8 @@ option:not([value=""]) {
 .popUpmsg {
   color: #372549;
   font-size: var(--font-size-title);
-  display: flex; 
-  justify-content: center; 
+  display: flex;
+  justify-content: center;
 }
 
 /* Logout button style */
@@ -791,7 +886,7 @@ option:not([value=""]) {
 }
 
 .confirm-card {
-  background-color: white;  
+  background-color: white;
   backdrop-filter: blur(20px);
   border-radius: 16px;
   padding: 24px;
@@ -881,10 +976,11 @@ option:not([value=""]) {
   .user-posts-div {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
+    gap: 24px;
+    padding-bottom: 80px;
   }
 
-    .side {
+  .side {
     height: 100vh;
     display: flex;
   }
@@ -906,6 +1002,6 @@ option:not([value=""]) {
   .logout-item a {
     display: block;
     padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
 }
