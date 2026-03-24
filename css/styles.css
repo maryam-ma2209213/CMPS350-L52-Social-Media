@@ -737,7 +737,12 @@ option:not([value=""]) {
   transform: scale(1.1);
 }
 
+#logout-btn {
+  opacity: 0.7;
+}
+
 #logout-btn:hover {
+  opacity: 1;
   color: #ff4d4d;
 }
 
@@ -748,55 +753,6 @@ option:not([value=""]) {
 
 .side .page-links .fa-solid {
   width: 100%;
-}
-
-/* Tablet View */
-@media (min-width: 768px) {
-  .user-posts-div {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Desktop View */
-@media (min-width: 1025px) {
-  .auth-layout {
-    display: flex;
-    min-height: 100vh;
-  }
-
-  .auth-section {
-    flex: 0.5;
-    justify-content: center;
-    align-items: center;
-    padding: var(--spacing-xl);
-  }
-
-  .form-section,
-  .register-section {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .form-card {
-    max-width: 400px;
-    width: 100%;
-  }
-
-  .platform-name {
-    font-size: 3rem;
-  }
-
-  .platform-slogan {
-    font-size: 1.3rem;
-  }
-
-  .user-posts-div {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-  }
 }
 
 /* Logout button style */
@@ -861,4 +817,78 @@ option:not([value=""]) {
 
 .btn-danger:hover {
   background: #ff1a1a;
+}
+
+/* Tablet View */
+@media (min-width: 768px) {
+  .user-posts-div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop View */
+@media (min-width: 1025px) {
+  .auth-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .auth-section {
+    flex: 0.5;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-xl);
+  }
+
+  .form-section,
+  .register-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form-card {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .platform-name {
+    font-size: 3rem;
+  }
+
+  .platform-slogan {
+    font-size: 1.3rem;
+  }
+
+  .user-posts-div {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+
+    .side {
+    height: 100vh;
+    display: flex;
+  }
+
+  .page-links {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 20px;
+  }
+
+  .logout-item {
+    margin-top: auto;
+    padding-top: 300px;
+    margin-bottom: 10px;
+  }
+
+  .logout-item a {
+    display: block;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
 }
