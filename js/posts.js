@@ -2,6 +2,12 @@
 
 const btn = document.querySelector(".btn");
 const commentSection = document.querySelector(".comment-section");
+const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+// prevent unauthorized access
+if (!currentUser) {
+  window.location.href = "login.html";
+}
 
 btn.addEventListener("click", show);
 
@@ -41,4 +47,39 @@ function liked(){
     else{
         like.src = "/media/empty-heart.png"
     }
+}
+
+// logout button
+const logoutBtn = document.querySelector("#logout-btn");
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+
+    const logoutBtn = document.querySelector("#logout-btn");
+    const modal = document.querySelector("#logout-confirm");
+    const confirmLogout = document.querySelector("#confirm-logout");
+    const cancelLogout = document.querySelector("#cancel-logout");
+
+    if (logoutBtn) {
+    logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        modal.classList.remove("hidden");
+    });
+    }
+
+    if (cancelLogout) {
+    cancelLogout.addEventListener("click", () => {
+        modal.classList.add("hidden"); // hide modal
+    });
+    }
+
+    if (confirmLogout) {
+    confirmLogout.addEventListener("click", () => {
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "login.html";
+    });
+    }
+  });
 }
