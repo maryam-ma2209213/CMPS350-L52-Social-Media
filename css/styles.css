@@ -389,10 +389,9 @@ input:focus {
   border-color: #cd98b0;
 }
 #caption:focus {
-  border-color: #cd98b0; 
+  border-color: #cd98b0;
   outline: none;
 }
-
 
 .buttons {
   display: flex;
@@ -418,7 +417,7 @@ input:focus {
   background-color: #cd98b0;
 }
 
-#postCaption{
+#postCaption {
   display: flex;
   justify-content: center;
   margin: var(--spacing-md);
@@ -607,8 +606,21 @@ option:not([value=""]) {
 }
 
 /* For profile.html */
+
+.username-div,
+.profile-pic-div {
+  margin-left: 4.5rem;
+}
+
+.about-you-div,
+#edit-prof-link {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+}
 .posts-followers-following {
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 .profile-info.div {
@@ -620,29 +632,67 @@ option:not([value=""]) {
 .user-posts-div {
   width: 70%;
   display: grid;
+  justify-content: center;
   grid-template-columns: 1fr;
-  gap: 4px;
+  gap: 10px;
   margin: auto;
   padding: 10px;
 }
+
+.user-posts-div .post {
+  background-color: var(--color-surface);
+  padding: 1.5rem 1rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  width: 70%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+/* for image/video posts */
 .post img,
 .post video {
   width: 100%;
   height: 100%;
   display: block;
+  /* if nav not moved to top, then we use margin-left */
+  /* margin-left: 1rem; */
   object-fit: cover;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border: 4px solid var(--color-text-muted);
 }
+
+/* for other-profile.html */
+.follow-btn,
+#edit-prof-link {
+  text-decoration: none;
+  display: block;
+  justify-self: center;
+  margin: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background: var(--color-text-muted);
+  color: var(--color-surface);
+}
+.follow-btn:hover,
+#edit-prof-link:hover {
+  cursor: pointer;
+  color: var(--color-border);
+}
+.follow-btn:active,
+#edit-prof-link:active {
+  background-color: var(--color-accent);
+}
+
 /* navbar styling */
-.navbar{
+.navbar {
   display: flex;
   justify-content: space-evenly;
   padding-top: var(--spacing-lg);
   padding-bottom: var(--spacing-sm);
 }
-.navbar a{
+.navbar a {
   text-decoration: none;
   color: #372549;
   font-size: large;
@@ -676,17 +726,17 @@ option:not([value=""]) {
   color: #ba9ed7;
   text-decoration: none;
   padding: 10px 15px;
-  border-radius: var(--radius-sm); 
+  border-radius: var(--radius-sm);
+  font-size: large;
 }
 
 .page-links a:hover {
   background-color: #372549;
 }
 
-.side .page-links .fa-solid{
+.side .page-links .fa-solid {
   width: 100%;
 }
-
 
 /* Tablet View */
 @media (min-width: 768px) {
