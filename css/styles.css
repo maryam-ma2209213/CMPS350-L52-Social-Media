@@ -233,6 +233,7 @@ input:focus {
   grid-template-columns: minmax(200px, 1fr);
   gap: 25px;
   margin: var(--spacing-md);
+  transition: margin 0.3s ease;
   padding-bottom: var(--spacing-sm);
 }
 
@@ -963,6 +964,9 @@ option:not([value=""]) {
   .user-posts-div {
     grid-template-columns: repeat(2, 1fr);
   }
+  .feed-section{
+    margin: var(--spacing-md) 100px;
+  }
 }
 
 /* Desktop View */
@@ -977,6 +981,10 @@ option:not([value=""]) {
     justify-content: center;
     align-items: center;
     padding: var(--spacing-xl);
+  }
+
+  .feed-section{
+    margin: var(--spacing-md) 170px;
   }
 
   .form-section,
