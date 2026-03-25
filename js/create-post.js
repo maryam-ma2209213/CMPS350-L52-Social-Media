@@ -58,7 +58,9 @@ function savePost(){
         text: captionText,
         image: postImage,
         user: "Username",
-        time: new Date().toLocaleString()
+        time: new Date().toLocaleString(),
+        likes: [],
+        comments: [],
     };
     posts.push(newPost);
     localStorage.setItem("posts", JSON.stringify(posts));
