@@ -87,3 +87,9 @@ if (savedPfp) {
     const userPfps = document.querySelectorAll(".userPfpImage");
     userPfps.forEach(img => img.src = savedPfp);
 }
+
+//helpers
+function getUser(userId) {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    return users.find(u => u.id === userId);
+}

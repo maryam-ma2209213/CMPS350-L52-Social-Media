@@ -2,62 +2,90 @@
 const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
 if (!currentUser) window.location.href = "login.html";
 
-// profile header
-const profilePic   = document.getElementById("profile-picture");
-const profileInput = document.getElementById("selectedPfp");
-const usernameHeader   = document.getElementById("username-h3");
-const aboutYouEl   = document.getElementById("about-you");
+// read target user from URL
+const params     = new URLSearchParams(window.location.search);
+const targetName = params.get("user");
+if (!targetName) window.location.href = "feed.html";
 
-if (usernameHeader) usernameHeader.textContent = currentUser.username || "Username";
-if (aboutYouEl) aboutYouEl.textContent = currentUser.bio      || "";
-const savedPfp = localStorage.getItem("userProfilePic");
-if (savedPfp && profilePic) profilePic.src = savedPfp;
+// redirect if user's own profile
+if (targetName === currentUser.username) window.location.href = "user-profile.html";
 
-// click pfp to change it
-if (profilePic && profileInput) {
-    profilePic.addEventListener("click", () => profileInput.click());
-    profileInput.addEventListener("change", () => {
-        const file = profileInput.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            profilePic.src = e.target.result;
-            localStorage.setItem("userProfilePic", e.target.result);
-            currentUser.profilePicture = e.target.result;
-            const users = JSON.parse(localStorage.getItem("users")) || [];
-            const idx   = users.findIndex(u => u.id === currentUser.id);
-            if (idx !== -1) users[idx] = currentUser;
-            localStorage.setItem("users",        JSON.stringify(users));
-            localStorage.setItem("loggedInUser", JSON.stringify(currentUser));
-        };
-        reader.readAsDataURL(file);
-    });
+const users      = JSON.parse(localStorage.getItem("users")) || [];
+const targetUser = users.find(u => u.username === targetName);
+
+// header
+const usernameHeader = document.getElementById("username-h3");
+const aboutYouEl = document.getElementById("about-you");
+const profilePic = document.getElementById("profile-picture");
+
+if (usernameHeader) usernameHeader.textContent = targetName;
+if (targetUser) {
+    if (aboutYouEl) aboutYouEl.textContent = targetUser.bio || "No bio yet.";
+    if (profilePic && targetUser.profilePicture && targetUser.profilePicture !== "default.png") {
+        profilePic.src = targetUser.profilePicture;
+    }
 }
 
-// posts / followers / following counts
+// follow button
+const followBtn = document.querySelector(".follow-btn");
+const followKey = `following_${currentUser.id}`;
+let isFollowing = (JSON.parse(localStorage.getItem(followKey)) || []).includes(targetName);
+ 
+function updateFollowBtn() {
+    if (!followBtn) return;
+    followBtn.textContent      = isFollowing ? "Following" : "Follow";
+    followBtn.style.background = isFollowing ? "var(--color-accent)" : "";
+}
+updateFollowBtn();
+if (followBtn) {
+    followBtn.addEventListener("click", () => {
+        const list = JSON.parse(localStorage.getItem(followKey)) || [];
+        if (isFollowing) {
+            localStorage.setItem(followKey, JSON.stringify(list.filter(u => u !== targetName)));
+            isFollowing = false;
+        } else {
+            list.push(targetName);
+            localStorage.setItem(followKey, JSON.stringify(list));
+            isFollowing = true;
+        }
+        updateFollowBtn();
+        updateStats(); 
+    });
+}
+ 
+// posts / followers / following
 const allPosts  = JSON.parse(localStorage.getItem("posts")) || [];
-const userPosts = allPosts.filter(p => p.user === currentUser.username);
-const allUsers    = JSON.parse(localStorage.getItem("users")) || [];
-const followerCount = allUsers.filter(u => {
-    const theirFollowing = JSON.parse(localStorage.getItem(`following_${u.id}`)) || [];
-    return theirFollowing.includes(currentUser.username);
-}).length;
-const myFollowing     = JSON.parse(localStorage.getItem(`following_${currentUser.id}`)) || [];
-const followingCount  = myFollowing.length;
-
-const statEls = document.querySelectorAll(".posts-followers-following p");
-if (statEls[0]) statEls[0].textContent = `${userPosts.length} posts`;
-if (statEls[1]) statEls[1].textContent = `${followerCount} followers`;
-if (statEls[2]) statEls[2].textContent = `${followingCount} following`;
-
+const userPosts = allPosts.filter(p => p.user === targetName);
+function updateStats() {
+    const followerCount = allUsers.filter(u => {
+        const theirFollowing = JSON.parse(localStorage.getItem(`following_${u.id}`)) || [];
+        return theirFollowing.includes(targetName);
+    }).length + (isFollowing ? 0 : 0); 
+    
+    const freshFollowers = allUsers.filter(u => {
+        const f = JSON.parse(localStorage.getItem(`following_${u.id}`)) || [];
+        return f.includes(targetName);
+    }).length;
+ 
+    const targetFollowing = targetUser
+        ? (JSON.parse(localStorage.getItem(`following_${targetUser.id}`)) || []).length
+        : 0;
+ 
+    const statEls = document.querySelectorAll(".posts-followers-following p");
+    if (statEls[0]) statEls[0].textContent = `${userPosts.length} posts`;
+    if (statEls[1]) statEls[1].textContent = `${freshFollowers} followers`;
+    if (statEls[2]) statEls[2].textContent = `${targetFollowing} following`;
+}
+updateStats();
+ 
 // posts grid
 const postsGrid = document.querySelector(".user-posts-div");
 if (postsGrid) {
     postsGrid.innerHTML = "";
-    //if no posts display text
+ 
     if (userPosts.length === 0) {
         const empty = document.createElement("p");
-        empty.textContent = "No posts yet. Share something!";
+        empty.textContent = "This user hasn't posted yet.";
         empty.style.cssText = "grid-column:1/-1;text-align:center;opacity:.6;padding:2rem;";
         postsGrid.appendChild(empty);
     } else {
@@ -80,11 +108,11 @@ if (postsGrid) {
         });
     }
 }
-
+ 
 // modal
 function openModal(postId) {
     const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    const post  = posts.find(p => p.id == postId);
+    const post  = posts.find(p => p.id == postId); 
     if (!post) return;
     const authorPfp = resolveAuthorPfp(post.user);
     const isLiked   = (post.likes || []).includes(currentUser.username);
@@ -128,12 +156,10 @@ function openModal(postId) {
             </div>
         </div>
     `;
-
+ 
     document.body.appendChild(backdrop);
     backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(backdrop); });
     backdrop.querySelector(".post-modal-close").addEventListener("click", () => closeModal(backdrop));
-
-    // like
     backdrop.querySelector("#modalLikeBtn").addEventListener("click", () => {
         const posts   = JSON.parse(localStorage.getItem("posts")) || [];
         const current = posts.find(p => p.id == postId);
@@ -149,15 +175,14 @@ function openModal(postId) {
         backdrop.querySelector("#modalLikeImg").src           = nowLiked ? "/media/v3.png" : "/media/empty-heart.png";
         backdrop.querySelector("#modalLikeCount").textContent = current.likes.length;
         backdrop.querySelector("#modalLikesList").innerHTML   = renderLikesList(current.likes);
-        refreshGrid();
+        refreshGrid(targetName);
     });
-
-    // comment
+ 
     const commentInput = backdrop.querySelector("#modalCommentInput");
     backdrop.querySelector("#modalPostBtn").addEventListener("click", () => postComment(postId, commentInput, backdrop));
     commentInput.addEventListener("keydown", (e) => { if (e.key === "Enter") postComment(postId, commentInput, backdrop); });
 }
-
+ 
 function postComment(postId, input, backdrop) {
     const text = input.value.trim();
     if (!text) return;
@@ -172,7 +197,6 @@ function postComment(postId, input, backdrop) {
     };
     current.comments.push(commentObj);
     localStorage.setItem("posts", JSON.stringify(posts));
-
     const commentsDiv = backdrop.querySelector("#modalComments");
     const el = document.createElement("div");
     el.innerHTML = renderSingleComment(commentObj);
@@ -180,20 +204,20 @@ function postComment(postId, input, backdrop) {
     commentsDiv.scrollTop = commentsDiv.scrollHeight;
     backdrop.querySelector("#modalCommentCount").textContent = current.comments.length;
     input.value = "";
-    refreshGrid();
+    refreshGrid(targetName);
 }
-
+ 
 function closeModal(backdrop) {
     backdrop.style.transition = "opacity 0.15s ease";
     backdrop.style.opacity    = "0";
     setTimeout(() => backdrop.remove(), 150);
 }
-
+ 
 function renderComments(comments) {
     if (!comments.length) return `<p style="color:#bbb;font-size:.85rem;text-align:center;margin-top:1rem;">No comments yet.</p>`;
     return comments.map(renderSingleComment).join("");
 }
-
+ 
 function renderSingleComment(c) {
     const pfp = c.profilePic || "media/emptypfp.jpg";
     return `<div class="modal-comment">
@@ -201,13 +225,13 @@ function renderSingleComment(c) {
         <div class="modal-comment-body"><strong>${c.user}</strong> ${c.text}</div>
     </div>`;
 }
-
+ 
 function renderLikesList(likes) {
     if (!likes.length) return "";
     if (likes.length <= 5) return `Liked by: ${likes.join(", ")}`;
     return `Liked by: ${likes.slice(0, 5).join(", ")} and ${likes.length - 5} more`;
 }
-
+ 
 function resolveAuthorPfp(username) {
     if (username === currentUser.username) {
         return localStorage.getItem("userProfilePic") || currentUser.profilePicture || null;
@@ -216,13 +240,13 @@ function resolveAuthorPfp(username) {
     const user  = users.find(u => u.username === username);
     return (user && user.profilePicture !== "default.png") ? user.profilePicture : null;
 }
-
-function refreshGrid() {
-    const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    const mine  = posts.filter(p => p.user === currentUser.username);
-    const cards = document.querySelectorAll(".user-posts-div .post");
+ 
+function refreshGrid(ownerName) {
+    const posts  = JSON.parse(localStorage.getItem("posts")) || [];
+    const theirs = posts.filter(p => p.user === ownerName);
+    const cards  = document.querySelectorAll(".user-posts-div .post");
     cards.forEach((card, i) => {
-        const post = mine[i];
+        const post = theirs[i];
         if (!post) return;
         const overlay = card.querySelector(".post-overlay");
         if (overlay) {

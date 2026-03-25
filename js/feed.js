@@ -158,7 +158,7 @@ if (posts.length === 0) {
                 current.comments = [];
             }
             const commentObj = {
-                user: currentUser.username,
+                user: currentUser.id,
                 profilePic: currentUser.profilePicture || "media/emptypfp.jpg",
                 text: input,
                 time: new Date().toLocaleString()
