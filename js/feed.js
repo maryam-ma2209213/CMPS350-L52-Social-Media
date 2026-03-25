@@ -118,10 +118,9 @@ if (posts.length === 0) {
                 // comments.append(p);
                 const newComment = document.createElement("div");
                 const img = document.createElement("img");
-                img.src = "media/emptypfp.jpg";
+                img.src = c.profilePic;
                 img.alt = "profile pic";
                 img.classList.add("commentPfp");
-
 
 
                 const text = document.createElement("span");
@@ -150,21 +149,21 @@ if (posts.length === 0) {
             if (!current.comments) {
                 current.comments = [];
             }
-
-            // add
-            current.comments.push({
+            const commentObj = {
                 user: currentUser.username,
-                profilePic: currentUser.profilePicture,
+                profilePic: currentUser.profilePicture || "media/emptypfp.jpg",
                 text: input,
                 time: new Date().toLocaleString()
-            });
+            };
 
+            // add
+            current.comments.push(commentObj);
             localStorage.setItem("posts", JSON.stringify(posts));
 
 
             const newComment = document.createElement("div");
             const img = document.createElement("img");
-            img.src = "media/emptypfp.jpg";
+            img.src = commentObj.profilePic;
             img.alt = "profile pic";
             img.classList.add("commentPfp");
 
