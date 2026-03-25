@@ -15,17 +15,21 @@ if (posts.length === 0) {
 
         card.innerHTML = `
     <div class="post-top">
-        <div class="user">
-            ${localStorage.getItem("userProfilePic") ?
-                `<img class="userPfpImage" src="${localStorage.getItem("userProfilePic")}" alt="user profile picture">`
+        <div class="user-left">
+            ${localStorage.getItem("userProfilePic") ? 
+                `<img class="userPfpImage" src="${localStorage.getItem("userProfilePic")}" alt="user profile picture">` 
                 : ""}
-            <h6 class="post-owner">${post.user}</h6>
+        <h6 class="post-owner">${post.user}</h6>
+        </div>
+        <div class="user-right">
+            <i class="fa-regular fa-pen-to-square edit-icon"></i>
+            <i class="fa-regular fa-trash-can delete-icon"></i>
         </div>
     </div>
     <div class="post-content">
         ${post.image ? `<img src="${post.image}" alt="post image">` : ""}
     </div>
-    <p>${post.text}</p>
+    <p class="post-text">${post.text}</p>
     <p class="post-time">${post.time}</p>
     <div class="bar">
         <div class="likeBar">
@@ -44,8 +48,12 @@ if (posts.length === 0) {
         </div>
     </div>
     `;
-
         feedSection.appendChild(card);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // icons next to username
+        const editIcon = card.querySelector(".fa-pen-to-square");
+        const deleteIcon = card.querySelector(".fa-trash-can");
 
         // like button
         const like = card.querySelector(".likeBtn");
@@ -177,6 +185,75 @@ if (posts.length === 0) {
             //clear the comment bar
             addComment.value = "";
         }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //for the txt
+    editIcon.addEventListener("click", () => {
+    const captionEdit = card.querySelector(".post-text");
+    const currentText = captionEdit.textContent;
 
+    const textarea = document.createElement("textarea");
+    textarea.value = currentText;
+    textarea.classList.add("edit-caption");
+    captionEdit.replaceWith(textarea);
+    textarea.focus();
+    textarea.addEventListener("keydown", (e) => {
+        if(e.key === "Enter") {
+            e.preventDefault();
+            const updatedText = textarea.value;
+            captionEdit.textContent = updatedText;
+            textarea.replaceWith(captionEdit);
+            const posts = JSON.parse(localStorage.getItem("posts")) || [];
+            const current = posts.find(p => p.id === post.id);
+            current.text = updatedText;
+            localStorage.setItem("posts", JSON.stringify(posts));
+            }
+        });
+    });
+    //for pictures
+    editIcon.addEventListener("click", () => {
+    const postContent = card.querySelector(".post-content");
+    let imgEl = postContent.querySelector("img");
+    if (!imgEl) {
+        imgEl = document.createElement("img");
+        postContent.appendChild(imgEl);
+    }
 
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.style.display = "none";
+
+    document.body.appendChild(fileInput);
+    fileInput.click();
+
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                imgEl.src = event.target.result;
+                const posts = JSON.parse(localStorage.getItem("posts")) || [];
+                const current = posts.find(p => p.id === post.id);
+                current.image = event.target.result;
+                localStorage.setItem("posts", JSON.stringify(posts));
+            };
+            reader.readAsDataURL(file);
+            }
+        });
+    });
+    //for deleting the post
+    deleteIcon.addEventListener("click", () => {
+    if (confirm("Are you sure you want to delete this post?")) {
+        let posts = JSON.parse(localStorage.getItem("posts")) || [];
+        posts = posts.filter(p => p.id !== post.id);
+        localStorage.setItem("posts", JSON.stringify(posts));
+        card.remove();
+        if (posts.length === 0) {
+            const popUp = document.createElement("p");
+            popUp.classList.add("popUpmsg");
+            popUp.textContent = "No Posts Yet! Share Something!";
+            feedSection.appendChild(popUp);
+            }
+        }
+    });
     });

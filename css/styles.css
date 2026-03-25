@@ -265,9 +265,22 @@ input:focus {
 
 .post-top {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 10px;
   padding-top: var(--spacing-sm);
+}
+
+.user-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-right {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .following {
