@@ -75,6 +75,9 @@ h3 {
       var(--color-primary),
       var(--color-secondary));
 }
+.auth-body main{
+  margin-left: 0;
+}
 
 .banner-content {
   text-align: center;
