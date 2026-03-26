@@ -101,6 +101,13 @@ function openModal(postId) {
                 <div class="post-modal-header">
                     ${authorPfp ? `<img src="${authorPfp}" alt="${post.user}">` : ""}
                     <span class="modal-username">${post.user}</span>
+                    <div class="modal-options">
+                        <i class="fa-solid fa-ellipsis"></i>
+                        <div class="dropdown hidden">
+                            <p class="edit-btn">Edit</p>
+                            <p class="delete-btn">Delete</p>
+                        </div>
+                    </div>
                     <button class="post-modal-close" aria-label="Close">✕</button>
                 </div>
                 ${post.text ? `<div class="post-modal-caption">${post.text}</div>` : ""}
@@ -133,6 +140,99 @@ function openModal(postId) {
     backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(backdrop); });
     backdrop.querySelector(".post-modal-close").addEventListener("click", () => closeModal(backdrop));
 
+    //dots in top
+    const dots = backdrop.querySelector(".fa-ellipsis");
+    const dropdown = backdrop.querySelector(".dropdown");
+    dots.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle("hidden");
+    });
+    document.addEventListener("click", () => {
+        dropdown.classList.add("hidden");
+    });
+    //deleting button on top
+    const deleteBtn = backdrop.querySelector(".delete-btn");
+
+    deleteBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        let posts = JSON.parse(localStorage.getItem("posts")) || [];
+        posts = posts.filter(p => p.id !== postId);
+        localStorage.setItem("posts", JSON.stringify(posts));
+        closeModal(backdrop);
+        refreshGrid();
+    });
+    //editing same in feed
+    const editIcon = backdrop.querySelector(".edit-btn");
+    editIcon.addEventListener("click", (e) => {
+    e.stopPropagation();
+    //editing caption
+    const captionEdit = backdrop.querySelector(".post-modal-caption");
+    if (captionEdit) {
+        const currentText = captionEdit.textContent;
+
+        const textarea = document.createElement("textarea");
+        textarea.value = currentText;
+        textarea.classList.add("edit-caption");
+
+        captionEdit.replaceWith(textarea);
+        textarea.focus();
+
+        textarea.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+
+                const updatedText = textarea.value;
+
+                const newCaption = document.createElement("div");
+                newCaption.classList.add("post-modal-caption");
+                newCaption.textContent = updatedText;
+
+                textarea.replaceWith(newCaption);
+
+                const posts = JSON.parse(localStorage.getItem("posts")) || [];
+                const current = posts.find(p => p.id === post.id);
+                current.text = updatedText;
+                localStorage.setItem("posts", JSON.stringify(posts));
+            }
+        });
+    }
+    //editing the picture
+    const postContent = backdrop.querySelector(".post-modal-image");
+    let imgEdit = postContent.querySelector("img");
+
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.style.display = "none";
+
+    document.body.appendChild(fileInput);
+    fileInput.click();
+
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+
+                if (!imgEdit) {
+                    imgEdit = document.createElement("img");
+                    postContent.innerHTML = "";
+                    postContent.appendChild(imgEdit);
+                }
+
+                imgEdit.src = event.target.result;
+
+                const posts = JSON.parse(localStorage.getItem("posts")) || [];
+                const current = posts.find(p => p.id === post.id);
+                current.image = event.target.result;
+                localStorage.setItem("posts", JSON.stringify(posts));
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    dropdown.classList.add("hidden");
+    });
     // like
     backdrop.querySelector("#modalLikeBtn").addEventListener("click", () => {
         const posts   = JSON.parse(localStorage.getItem("posts")) || [];

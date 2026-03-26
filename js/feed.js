@@ -124,24 +124,28 @@ if (posts.length === 0) {
         const addComment = card.querySelector(".add-comment");
         const addBtn = card.querySelector(".add-button");
 
-        if (post.comments) {
-            post.comments.forEach(c => {
-                const newComment = document.createElement("div");
-                const img = document.createElement("img");
-                img.src = c.profilePic;
-                img.alt = "profile pic";
-                img.classList.add("commentPfp");
+    if (post.comments) {
+    post.comments.forEach(c => {
+        const newComment = document.createElement("div");
+        newComment.classList.add("comment");
 
-                const text = document.createElement("span");
-                // text.textContent = " " + c.user + ": " + c.text; //new (A)
-                text.textContent = " " + getUser(c.user).username + ": " + c.text;
+        const userObj = getUser(c.user); // c.user is the ID
+        const username = userObj ? userObj.username : "Unknown"; // fallback if user not found
+        const profilePic = userObj && userObj.profilePicture ? userObj.profilePicture : "media/emptypfp.jpg";
 
-                newComment.appendChild(img);
-                newComment.appendChild(text);
-                comments.append(newComment);
+        const img = document.createElement("img");
+        img.src = profilePic;
+        img.alt = username + " profile pic";
+        img.classList.add("commentPfp");
 
-            });
-        }
+        const text = document.createElement("span");
+        text.textContent = ` ${username}: ${c.text}`;
+
+        newComment.appendChild(img);
+        newComment.appendChild(text);
+        comments.appendChild(newComment);
+        });
+    }
 
         if (addBtn) {
             addBtn.addEventListener("click", inputComment);
