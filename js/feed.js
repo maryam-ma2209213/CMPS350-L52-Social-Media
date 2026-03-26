@@ -1,268 +1,263 @@
+// feed.js — fixed
 const feedSection = document.querySelector(".feed-section");
-const posts = JSON.parse(localStorage.getItem("posts")) || [];
-// const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+// currentUser is declared in global.js (already loaded before this script)
 
-feedSection.innerHTML = ""
-if (posts.length === 0) {
-    const popUp = document.createElement("p");
-    popUp.classList.add("popUpmsg");
-    popUp.textContent = "No Posts Yet! Share Something!";
-    feedSection.appendChild(popUp);
-} else
+// BUG 5 FIX: only show posts from the logged-in user + people they follow
+function getVisiblePosts() {
+    const allPosts = JSON.parse(localStorage.getItem("posts")) || [];
+    if (!currentUser) return allPosts;
+    const myFollowing = JSON.parse(localStorage.getItem(`following_${currentUser.id}`)) || [];
+    // include own posts and posts from followed users
+    return allPosts.filter(p => p.user === currentUser.username || myFollowing.includes(p.user));
+}
+
+
+
+function renderFeed() {
+    
+    // inside renderFeed(), right after feedSection.innerHTML = ""
+function renderFollowingCard() {
+    if (!currentUser) return;
+
+    const followingList = JSON.parse(localStorage.getItem(`following_${currentUser.id}`)) || [];
+    if (followingList.length === 0) return;
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const card = document.createElement("article");
+    card.classList.add("feed-card", "following-card");
+
+    let inner = `<h5>Following</h5><div class="following-list">`;
+
+    followingList.forEach(username => {
+        const user = users.find(u => u.username === username);
+        const pfp = user && user.profilePicture ? user.profilePicture : "media/emptypfp.jpg";
+        inner += `
+            <div class="following-item">
+                <img src="${pfp}" alt="${username} profile" class="following-pfp">
+                <span>${username}</span>
+            </div>
+        `;
+    });
+
+    inner += `</div>`;
+    card.innerHTML = inner;
+
+    // prepend instead of append — shows on top
+    feedSection.prepend(card);
+}
+
+// --- in renderFeed ---
+feedSection.innerHTML = "";
+
+// first render following card
+renderFollowingCard();
+
+// then render all posts as usual
+const posts = getVisiblePosts();
+
+    if (posts.length === 0) {
+        const popUp = document.createElement("p");
+        popUp.classList.add("popUpmsg");
+        popUp.textContent = "No Posts Yet! Follow someone or share something!";
+        feedSection.appendChild(popUp);
+        return;
+    }
+
     [...posts].reverse().forEach(post => {
         const card = document.createElement("article");
         card.classList.add("feed-card");
 
+        // BUG 4 FIX: look up each post author's pfp individually instead of always using the logged-in user's pfp
+        const authorPfp = resolveAuthorPfp(post.user);
+        const pfpHtml = authorPfp
+            ? `<img class="userPfpImage" src="${authorPfp}" alt="${post.user} profile picture">`
+            : `<img class="userPfpImage" src="media/emptypfp.jpg" alt="profile picture">`;
+
+        // Only show edit/delete icons on the user's own posts
+        const isOwn = currentUser && post.user === currentUser.username;
+        const actionIcons = isOwn
+            ? `<i class="fa-regular fa-pen-to-square edit-icon"></i>
+               <i class="fa-regular fa-trash-can delete-icon"></i>`
+            : "";
+
         card.innerHTML = `
-    <div class="post-top">
-        <div class="user-left">
-            ${localStorage.getItem("userProfilePic") ?
-                `<img class="userPfpImage" src="${localStorage.getItem("userProfilePic")}" alt="user profile picture">`
-                : ""}
-        <h6 class="post-owner">${post.user}</h6>
-        </div>
-        <div class="user-right">
-            <i class="fa-regular fa-pen-to-square edit-icon"></i>
-            <i class="fa-regular fa-trash-can delete-icon"></i>
-        </div>
-    </div>
-    <div class="post-content">
-        ${post.image ? `<img src="${post.image}" alt="post image">` : ""}
-    </div>
-    <p class="post-text">${post.text}</p>
-    <p class="post-time">${post.time}</p>
-    <div class="bar">
-        <div class="likeBar">
-        <img class="likeBtn" src="/media/empty-heart.png" alt="like button">
-        <span class="likeCount">${post.likes ? post.likes.length : 0}</span>
-        </div>
-        <img class="btn" src="/media/c4.png" alt="comment button">
-    </div>
-    <div class="comment-section hidden">
-        <div class="comment-box">
-            <div class="comments"></div>
-            <div class="add">
-                <input type="text" class="add-comment" placeholder="Write a comment...">
-                <button class="add-button">+</button>
+        <div class="post-top">
+            <div class="user-left">
+                ${pfpHtml}
+                <h6 class="post-owner">${post.user}</h6>
+            </div>
+            <div class="user-right">
+                ${actionIcons}
             </div>
         </div>
-    </div>
-    `;
-        feedSection.appendChild(card);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <div class="post-content">
+            ${post.image ? `<img src="${post.image}" alt="post image">` : ""}
+        </div>
+        <p class="post-text">${post.text || ""}</p>
+        <p class="post-time">${post.time}</p>
+        <div class="bar">
+            <div class="likeBar">
+                <img class="likeBtn" src="/media/empty-heart.png" alt="like button">
+                <span class="likeCount">${post.likes ? post.likes.length : 0}</span>
+            </div>
+            <img class="btn" src="/media/c4.png" alt="comment button">
+        </div>
+        <div class="comment-section hidden">
+            <div class="comment-box">
+                <div class="comments"></div>
+                <div class="add">
+                    <input type="text" class="add-comment" placeholder="Write a comment...">
+                    <button class="add-button">+</button>
+                </div>
+            </div>
+        </div>
+        `;
 
-        // icons next to username
-        const editIcon = card.querySelector(".fa-pen-to-square");
-        const deleteIcon = card.querySelector(".fa-trash-can");
+        feedSection.appendChild(card);
 
         // like button
-        const like = card.querySelector(".likeBtn");
+        const like  = card.querySelector(".likeBtn");
         const count = card.querySelector(".likeCount");
 
-        // if the user already liked it show
         if (currentUser && post.likes && post.likes.includes(currentUser.id)) {
             like.src = "/media/v3.png";
             like.classList.add("liked");
         }
 
-        like.addEventListener("click", liked);
-        function liked() {
-            const posts = JSON.parse(localStorage.getItem("posts")) || [];
-            const current = posts.find(p => p.id === post.id);
-            // const user = currentUser ? currentUser.username : null;
-            const user = currentUser.id;
-            if (!user) return;
-            // check
-
-            if (!current.likes) {
-                current.likes = [];
-            }
-            // like.classList.toggle("liked");
-            // if (like.classList.contains("liked")) {
-            //     like.src = "/media/v3.png"
-            // }
-            // else {
-            //     like.src = "/media/empty-heart.png"
-            // }
-
-            if (current.likes.includes(user)) {
-                // remove like
-                current.likes = current.likes.filter(u => u !== user);
+        like.addEventListener("click", () => {
+            const allPosts = JSON.parse(localStorage.getItem("posts")) || [];
+            const current  = allPosts.find(p => p.id === post.id);
+            if (!current) return;
+            const uid = currentUser.id;
+            if (!current.likes) current.likes = [];
+            if (current.likes.includes(uid)) {
+                current.likes = current.likes.filter(u => u !== uid);
                 like.src = "/media/empty-heart.png";
                 like.classList.remove("liked");
             } else {
-                // like
-                current.likes.push(user);
-                // we r pushing the user id
+                current.likes.push(uid);
                 like.src = "/media/v3.png";
                 like.classList.add("liked");
             }
-
             count.textContent = current.likes.length;
-
-            localStorage.setItem("posts", JSON.stringify(posts));
-            // check posts here
-        }
-
-        function getUser(userId) {
-            const users = JSON.parse(localStorage.getItem("users")) || [];
-            return users.find(u => u.id === userId);
-        }
-
-        // comments show, hide part
-
-        const btn = card.querySelector(".btn");
-        const commentSection = card.querySelector(".comment-section");
-
-        if (btn) {
-            btn.addEventListener("click", show);
-        }
-
-        function show() {
-            commentSection.classList.toggle("hidden");
-        }
-
-        // add comments
-        const comments = card.querySelector(".comments");
-        const addComment = card.querySelector(".add-comment");
-        const addBtn = card.querySelector(".add-button");
-
-    if (post.comments) {
-    post.comments.forEach(c => {
-        const newComment = document.createElement("div");
-        newComment.classList.add("comment");
-
-        const userObj = getUser(c.user); // c.user is the ID
-        const username = userObj ? userObj.username : "Unknown"; // fallback if user not found
-        const profilePic = userObj && userObj.profilePicture ? userObj.profilePicture : "media/emptypfp.jpg";
-
-        const img = document.createElement("img");
-        img.src = profilePic;
-        img.alt = username + " profile pic";
-        img.classList.add("commentPfp");
-
-        const text = document.createElement("span");
-        text.textContent = ` ${username}: ${c.text}`;
-
-        newComment.appendChild(img);
-        newComment.appendChild(text);
-        comments.appendChild(newComment);
+            localStorage.setItem("posts", JSON.stringify(allPosts));
         });
-    }
 
-        if (addBtn) {
-            addBtn.addEventListener("click", inputComment);
+        // comments toggle
+        const commentToggle  = card.querySelector(".btn");
+        const commentSection = card.querySelector(".comment-section");
+        if (commentToggle) {
+            commentToggle.addEventListener("click", () => commentSection.classList.toggle("hidden"));
         }
 
-        function inputComment() {
+        // load existing comments
+        const commentsDiv = card.querySelector(".comments");
+        if (post.comments) {
+            post.comments.forEach(c => commentsDiv.appendChild(buildCommentEl(c)));
+        }
+
+        // add new comment
+        const addComment = card.querySelector(".add-comment");
+        const addBtn     = card.querySelector(".add-button");
+
+        function submitComment() {
             const input = addComment.value.trim();
-            // trim here check
-            // if comment empty
-            if (input === "") return;
-            // otherwise
-            const posts = JSON.parse(localStorage.getItem("posts")) || [];
-            const current = posts.find(p => p.id === post.id);
-
-            if (!current.comments) {
-                current.comments = [];
-            }
+            if (!input) return;
+            const allPosts = JSON.parse(localStorage.getItem("posts")) || [];
+            const current  = allPosts.find(p => p.id === post.id);
+            if (!current) return;
+            if (!current.comments) current.comments = [];
             const commentObj = {
-                user: currentUser.id,
-                profilePic: currentUser.profilePicture || "media/emptypfp.jpg",
-                text: input,
-                time: new Date().toLocaleString()
+                user:       currentUser.id,
+                username:   currentUser.username,
+                profilePic: localStorage.getItem("userProfilePic") || currentUser.profilePicture || "media/emptypfp.jpg",
+                text:       input,
+                time:       new Date().toLocaleString()
             };
-
-            // add
             current.comments.push(commentObj);
-            localStorage.setItem("posts", JSON.stringify(posts));
-
-            const newComment = document.createElement("div");
-            const img = document.createElement("img");
-            img.src = commentObj.profilePic;
-            img.alt = "profile pic";
-            img.classList.add("commentPfp");
-
-            const text = document.createElement("span");
-            text.textContent = " " + currentUser.username + ": " + commentObj.text;
-
-            newComment.appendChild(img);
-            newComment.appendChild(text);
-            comments.append(newComment);
-
-            //clear the comment bar
+            localStorage.setItem("posts", JSON.stringify(allPosts));
+            commentsDiv.appendChild(buildCommentEl(commentObj));
+            commentsDiv.scrollTop = commentsDiv.scrollHeight;
             addComment.value = "";
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //for the txt
-        editIcon.addEventListener("click", () => {
-            const captionEdit = card.querySelector(".post-text");
-            const currentText = captionEdit.textContent;
 
-            const textarea = document.createElement("textarea");
-            textarea.value = currentText;
-            textarea.classList.add("edit-caption");
-            captionEdit.replaceWith(textarea);
-            textarea.focus();
-            textarea.addEventListener("keydown", (e) => {
-                if (e.key === "Enter") {
-                    e.preventDefault();
-                    const updatedText = textarea.value;
-                    captionEdit.textContent = updatedText;
-                    textarea.replaceWith(captionEdit);
-                    const posts = JSON.parse(localStorage.getItem("posts")) || [];
-                    const current = posts.find(p => p.id === post.id);
-                    current.text = updatedText;
-                    localStorage.setItem("posts", JSON.stringify(posts));
+        if (addBtn) addBtn.addEventListener("click", submitComment);
+        addComment.addEventListener("keydown", (e) => { if (e.key === "Enter") submitComment(); });
+
+        // edit / delete — only wired if user owns the post
+        if (isOwn) {
+            const editIcon   = card.querySelector(".edit-icon");
+            const deleteIcon = card.querySelector(".delete-icon");
+
+            // edit caption
+            editIcon.addEventListener("click", () => {
+                const captionEl = card.querySelector(".post-text");
+                const currentText = captionEl.textContent;
+                const textarea = document.createElement("textarea");
+                textarea.value = currentText;
+                textarea.classList.add("edit-caption");
+                captionEl.replaceWith(textarea);
+                textarea.focus();
+                textarea.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        captionEl.textContent = textarea.value;
+                        textarea.replaceWith(captionEl);
+                        const allPosts = JSON.parse(localStorage.getItem("posts")) || [];
+                        const current  = allPosts.find(p => p.id === post.id);
+                        if (current) current.text = captionEl.textContent;
+                        localStorage.setItem("posts", JSON.stringify(allPosts));
+                    }
+                });
+            });
+
+            // delete post — BUG 1 FIX: re-render the whole feed after deletion so new cards get fresh event listeners
+            deleteIcon.addEventListener("click", () => {
+                if (confirm("Are you sure you want to delete this post?")) {
+                    let allPosts = JSON.parse(localStorage.getItem("posts")) || [];
+                    allPosts = allPosts.filter(p => p.id !== post.id);
+                    localStorage.setItem("posts", JSON.stringify(allPosts));
+                    renderFeed(); // full re-render instead of card.remove()
                 }
             });
-        });
-        //for pictures
-        editIcon.addEventListener("click", () => {
-            const postContent = card.querySelector(".post-content");
-            let imgEl = postContent.querySelector("img");
-            if (!imgEl) {
-                imgEl = document.createElement("img");
-                postContent.appendChild(imgEl);
-            }
-
-            const fileInput = document.createElement("input");
-            fileInput.type = "file";
-            fileInput.accept = "image/*";
-            fileInput.style.display = "none";
-
-            document.body.appendChild(fileInput);
-            fileInput.click();
-
-            fileInput.addEventListener("change", () => {
-                const file = fileInput.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        imgEl.src = event.target.result;
-                        const posts = JSON.parse(localStorage.getItem("posts")) || [];
-                        const current = posts.find(p => p.id === post.id);
-                        current.image = event.target.result;
-                        localStorage.setItem("posts", JSON.stringify(posts));
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
-        //for deleting the post
-        deleteIcon.addEventListener("click", () => {
-            if (confirm("Are you sure you want to delete this post?")) {
-                let posts = JSON.parse(localStorage.getItem("posts")) || [];
-                posts = posts.filter(p => p.id !== post.id);
-                localStorage.setItem("posts", JSON.stringify(posts));
-                card.remove();
-                if (posts.length === 0) {
-                    const popUp = document.createElement("p");
-                    popUp.classList.add("popUpmsg");
-                    popUp.textContent = "No Posts Yet! Share Something!";
-                    feedSection.appendChild(popUp);
-                }
-            }
-        });
+        }
     });
+}
 
+// helpers
+function buildCommentEl(c) {
+    const div = document.createElement("div");
+    div.classList.add("comment");
+    const pfp = c.profilePic || "media/emptypfp.jpg";
+    const displayName = c.username || resolveUsername(c.user);
+    const img = document.createElement("img");
+    img.src = pfp;
+    img.alt = displayName + " profile pic";
+    img.classList.add("commentPfp");
+    const text = document.createElement("span");
+    text.textContent = ` ${displayName}: ${c.text}`;
+    div.appendChild(img);
+    div.appendChild(text);
+    return div;
+}
+
+function resolveUsername(userId) {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const u = users.find(u => u.id === userId);
+    return u ? u.username : "Unknown";
+}
+
+// BUG 4 FIX: resolve each author's pfp from the users array, not from the current session key
+function resolveAuthorPfp(username) {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user  = users.find(u => u.username === username);
+    if (!user) return null;
+    // if this author is the logged-in user, prefer the live userProfilePic key (most up-to-date)
+    if (currentUser && user.id === currentUser.id) {
+        return localStorage.getItem("userProfilePic") || user.profilePicture || null;
+    }
+    return (user.profilePicture && user.profilePicture !== "default.png") ? user.profilePicture : null;
+}
+
+// initial render
+renderFeed();
