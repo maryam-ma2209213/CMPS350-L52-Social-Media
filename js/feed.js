@@ -106,7 +106,6 @@ if (posts.length === 0) {
             return users.find(u => u.id === userId);
         }
 
-
         // comments show, hide part
 
         const btn = card.querySelector(".btn");
@@ -127,15 +126,11 @@ if (posts.length === 0) {
 
         if (post.comments) {
             post.comments.forEach(c => {
-                // const p = document.createElement("p");
-                // p.textContent = c.text;
-                // comments.append(p);
                 const newComment = document.createElement("div");
                 const img = document.createElement("img");
                 img.src = c.profilePic;
                 img.alt = "profile pic";
                 img.classList.add("commentPfp");
-
 
                 const text = document.createElement("span");
                 text.textContent = " " + getUser(c.user).username + ": " + c.text;
@@ -164,7 +159,7 @@ if (posts.length === 0) {
                 current.comments = [];
             }
             const commentObj = {
-                user: currentUser.username,
+                user: currentUser.id,
                 profilePic: currentUser.profilePicture || "media/emptypfp.jpg",
                 text: input,
                 time: new Date().toLocaleString()
@@ -173,7 +168,6 @@ if (posts.length === 0) {
             // add
             current.comments.push(commentObj);
             localStorage.setItem("posts", JSON.stringify(posts));
-
 
             const newComment = document.createElement("div");
             const img = document.createElement("img");
@@ -263,3 +257,4 @@ if (posts.length === 0) {
             }
         });
     });
+
