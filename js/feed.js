@@ -133,6 +133,7 @@ if (posts.length === 0) {
                 img.classList.add("commentPfp");
 
                 const text = document.createElement("span");
+                // text.textContent = " " + c.user + ": " + c.text; //new (A)
                 text.textContent = " " + getUser(c.user).username + ": " + c.text;
 
                 newComment.appendChild(img);

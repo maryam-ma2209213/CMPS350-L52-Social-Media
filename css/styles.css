@@ -1,5 +1,5 @@
 :root {
-  /* Color Scheme */
+  /* Color Scheme
   --color-bg: #eacdc2;
   --color-surface: #ffffff;
   --color-primary: #1a1423;
@@ -7,6 +7,15 @@
   --color-text-main: #1a1423;
   --color-text-muted: #774c60;
   --color-accent: #b75d69;
+  --color-border: #ddd; */
+  /* Color Scheme */
+  --color-bg: #7a8fa5; /* fixed light blue */
+  --color-surface: #e0d4c3;
+  --color-primary: #1a1423;
+  --color-secondary: #13273f;
+  --color-text-main: #1a1423;
+  --color-text-muted: #6b4a3a;
+  --color-accent: #4e0000;
   --color-border: #ddd;
 
   /* Font Family */
@@ -50,7 +59,8 @@ body {
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(125deg, var(--color-text-muted), var(--color-bg));
+  /* background: linear-gradient(125deg, var(--color-text-muted), var(--color-bg)); */
+  background: var(--color-bg);
   font-size: var(--font-size-body);
   color: var(--color-text-main);
 }
@@ -149,7 +159,7 @@ input {
 
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+  color: var(--color-text-main);
   transition: 0.3s ease;
 }
 
@@ -548,7 +558,15 @@ input:focus {
   color: var(--color-surface);
 }
 
-#profile-pic,
+.edit-profile-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* for now */
+/* #profile-pic,
 .edit-profile-form #username,
 .edit-profile-form #about-you,
 .edit-profile-form #gender {
@@ -560,20 +578,20 @@ input:focus {
   padding: 12px;
   border-radius: 10px;
   color: var(--color-surface);
-}
+} */
 
-option:not([value=""]) {
+/* option:not([value=""]) {
   color: var(--color-surface);
   background-color: var(--color-accent);
-}
+} */
 
 .edit-profile-form #username::placeholder,
-#profile-pic,
-#about-you {
+.edit-profile-form #profile-pic,
+.edit-profile-form #aboutyou-edit {
   color: var(--color-surface);
   font-weight: 100;
   font-style: normal;
-  opacity: 90%;
+  opacity: 80%;
 }
 
 .edit-profile-section {
@@ -599,7 +617,7 @@ option:not([value=""]) {
   border-radius: var(--radius-sm);
   overflow: hidden;
   margin: 1rem auto;
-  max-width: 1200px;
+  max-width: 600px;
 }
 
 .edit-profile-fieldset {
@@ -609,24 +627,65 @@ option:not([value=""]) {
   margin: 1rem auto;
 }
 
-.edit-profile-form label,
-.edit-profile-form input,
-.edit-profile-form textarea {
+.edit-profile-form label {
+  display: block;
   font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 70%;
-  padding: var(--spacing-sm);
-  margin-top: var(--spacing-sm);
-  margin: var(--spacing-sm);
+  color: var(--color-surface);
+  font-style: oblique;
+  margin-bottom: 8px;
+  text-align: left;
+  margin-left: 1.5rem;
 }
 
-.profile-pic-div,
-.username-div,
-.about-you-div,
+.edit-profile-form input,
+.edit-profile-form textarea,
+.edit-profile-form select {
+  display: block;
+  justify-self: center;
+  width: 70%;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-surface);
+  font-family: inherit;
+  font-style: oblique;
+  font-size: var(--font-size-body);
+  margin-bottom: 4px;
+  transform: none;
+}
+
+.edit-profile-form input:focus,
+.edit-profile-form textarea:focus,
+.edit-profile-form select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.14);
+  transform: none;
+}
+
+.edit-profile-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.edit-profile-form input::placeholder,
+.edit-profile-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: normal;
+}
+
+option:not([value=""]) {
+  color: var(--color-surface);
+  background-color: var(--color-accent);
+}
+
+.pfp-edit-div,
+.username-edit-div,
+.aboutyou-edit-div,
 .gender-div {
-  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
   border-radius: 4px;
   color: var(--color-surface);
   font-style: oblique;

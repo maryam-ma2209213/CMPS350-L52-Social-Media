@@ -4,7 +4,7 @@ if (!currentUser) window.location.href = "login.html";
 
 // current values
 const usernameInput = document.getElementById("username");
-const aboutInput    = document.getElementById("about-you");
+const aboutInput    = document.getElementById("aboutyou-edit");
 const genderSelect  = document.getElementById("gender");
 const picInput      = document.getElementById("profile-pic");
 

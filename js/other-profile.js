@@ -10,8 +10,8 @@ if (!targetName) window.location.href = "feed.html";
 // redirect if user's own profile
 if (targetName === currentUser.username) window.location.href = "user-profile.html";
 
-const users      = JSON.parse(localStorage.getItem("users")) || [];
-const targetUser = users.find(u => u.username === targetName);
+const allUsers   = JSON.parse(localStorage.getItem("users")) || [];
+const targetUser = allUsers.find(u => u.username === targetName);
 
 // header
 const usernameHeader = document.getElementById("username-h3");
@@ -82,7 +82,6 @@ updateStats();
 const postsGrid = document.querySelector(".user-posts-div");
 if (postsGrid) {
     postsGrid.innerHTML = "";
- 
     if (userPosts.length === 0) {
         const empty = document.createElement("p");
         empty.textContent = "This user hasn't posted yet.";
@@ -177,7 +176,6 @@ function openModal(postId) {
         backdrop.querySelector("#modalLikesList").innerHTML   = renderLikesList(current.likes);
         refreshGrid(targetName);
     });
- 
     const commentInput = backdrop.querySelector("#modalCommentInput");
     backdrop.querySelector("#modalPostBtn").addEventListener("click", () => postComment(postId, commentInput, backdrop));
     commentInput.addEventListener("keydown", (e) => { if (e.key === "Enter") postComment(postId, commentInput, backdrop); });
