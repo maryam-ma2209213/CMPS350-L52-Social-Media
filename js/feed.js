@@ -60,7 +60,7 @@ if (posts.length === 0) {
         const count = card.querySelector(".likeCount");
 
         // if the user already liked it show
-        if (currentUser && post.likes && post.likes.includes(currentUser.username)) {
+        if (currentUser && post.likes && post.likes.includes(currentUser.id)) {
             like.src = "/media/v3.png";
             like.classList.add("liked");
         }
@@ -69,8 +69,10 @@ if (posts.length === 0) {
         function liked() {
             const posts = JSON.parse(localStorage.getItem("posts")) || [];
             const current = posts.find(p => p.id === post.id);
-            const user = currentUser ? currentUser.username : null;
+            // const user = currentUser ? currentUser.username : null;
+            const user = currentUser.id;
             if (!user) return;
+            // check
 
             if (!current.likes) {
                 current.likes = [];
@@ -91,6 +93,7 @@ if (posts.length === 0) {
             } else {
                 // like
                 current.likes.push(user);
+                // we r pushing the user id
                 like.src = "/media/v3.png";
                 like.classList.add("liked");
             }

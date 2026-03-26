@@ -233,12 +233,21 @@ function openModal(postId) {
 
     dropdown.classList.add("hidden");
     });
+
+    // render like initially
+    const username = currentUser.id;
+    const nowLiked = (post.likes || []).includes(username);
+    // const nowLiked = post.likes && post.likes.includes(username);
+    // added this so when the modal opens the heart updates
+    backdrop.querySelector("#modalLikeImg").src = nowLiked ? "/media/v3.png" : "/media/empty-heart.png";
+    backdrop.querySelector("#modalLikeCount").textContent = post.likes.length;
+    backdrop.querySelector("#modalLikesList").innerHTML = renderLikesList(post.likes);
     // like
     backdrop.querySelector("#modalLikeBtn").addEventListener("click", () => {
         const posts   = JSON.parse(localStorage.getItem("posts")) || [];
         const current = posts.find(p => p.id == postId);
         if (!current.likes) current.likes = [];
-        const username = currentUser.username;
+        const username = currentUser.id;
         if (current.likes.includes(username)) {
             current.likes = current.likes.filter(u => u !== username);
         } else {
@@ -294,18 +303,30 @@ function renderComments(comments) {
     return comments.map(renderSingleComment).join("");
 }
 
+function getUser(userId) {
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            return users.find(u => u.id === userId);
+        }
+
 function renderSingleComment(c) {
     const pfp = c.profilePic || "media/emptypfp.jpg";
     return `<div class="modal-comment">
-        <img src="${pfp}" alt="${c.user}">
-        <div class="modal-comment-body"><strong>${c.user}</strong> ${c.text}</div>
+        <img src="${pfp}" alt="${getUser(c.user).username}">
+        <div class="modal-comment-body"><strong>${getUser(c.user).username}</strong> ${c.text}</div>
     </div>`;
 }
-
+function idToUsername(likes){
+    return likes.map(l => {
+        const user = getUser(l);
+        return user ? user.username : "unknown";
+    });
+}
+// likes.join(", ")
+// likes.slice(0, 5).join(", ")
 function renderLikesList(likes) {
     if (!likes.length) return "";
-    if (likes.length <= 5) return `Liked by: ${likes.join(", ")}`;
-    return `Liked by: ${likes.slice(0, 5).join(", ")} and ${likes.length - 5} more`;
+    if (likes.length <= 5) return `Liked by: ${idToUsername(likes).join(", ")}`;
+    return `Liked by: ${idToUsername(likes).slice(0, 5).join(", ")} and ${likes.length - 5} more`;
 }
 
 function resolveAuthorPfp(username) {
