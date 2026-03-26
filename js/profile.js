@@ -3,13 +3,13 @@ const currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
 if (!currentUser) window.location.href = "login.html";
 
 // profile header
-const profilePic   = document.getElementById("profile-picture");
+const profilePic = document.getElementById("profile-picture");
 const profileInput = document.getElementById("selectedPfp");
-const usernameHeader   = document.getElementById("username-h3");
-const aboutYouEl   = document.getElementById("about-you");
+const usernameHeader = document.getElementById("username-h3");
+const aboutYouEl = document.getElementById("about-you");
 
 if (usernameHeader) usernameHeader.textContent = currentUser.username || "Username";
-if (aboutYouEl) aboutYouEl.textContent = currentUser.bio      || "";
+if (aboutYouEl) aboutYouEl.textContent = currentUser.bio || "";
 const savedPfp = localStorage.getItem("userProfilePic");
 if (savedPfp && profilePic) profilePic.src = savedPfp;
 
@@ -25,9 +25,9 @@ if (profilePic && profileInput) {
             localStorage.setItem("userProfilePic", e.target.result);
             currentUser.profilePicture = e.target.result;
             const users = JSON.parse(localStorage.getItem("users")) || [];
-            const idx   = users.findIndex(u => u.id === currentUser.id);
+            const idx = users.findIndex(u => u.id === currentUser.id);
             if (idx !== -1) users[idx] = currentUser;
-            localStorage.setItem("users",        JSON.stringify(users));
+            localStorage.setItem("users", JSON.stringify(users));
             localStorage.setItem("loggedInUser", JSON.stringify(currentUser));
         };
         reader.readAsDataURL(file);
@@ -35,15 +35,15 @@ if (profilePic && profileInput) {
 }
 
 // posts / followers / following counts
-const allPosts  = JSON.parse(localStorage.getItem("posts")) || [];
+const allPosts = JSON.parse(localStorage.getItem("posts")) || [];
 const userPosts = allPosts.filter(p => p.user === currentUser.username);
-const allUsers    = JSON.parse(localStorage.getItem("users")) || [];
+const allUsers = JSON.parse(localStorage.getItem("users")) || [];
 const followerCount = allUsers.filter(u => {
     const theirFollowing = JSON.parse(localStorage.getItem(`following_${u.id}`)) || [];
     return theirFollowing.includes(currentUser.username);
 }).length;
-const myFollowing     = JSON.parse(localStorage.getItem(`following_${currentUser.id}`)) || [];
-const followingCount  = myFollowing.length;
+const myFollowing = JSON.parse(localStorage.getItem(`following_${currentUser.id}`)) || [];
+const followingCount = myFollowing.length;
 
 const statEls = document.querySelectorAll(".posts-followers-following p");
 if (statEls[0]) statEls[0].textContent = `${userPosts.length} posts`;
@@ -59,7 +59,7 @@ function renderGrid() {
     if (!postsGrid) return;
 
     const freshPosts = JSON.parse(localStorage.getItem("posts")) || [];
-    const mine       = freshPosts.filter(p => p.user === currentUser.username);
+    const mine = freshPosts.filter(p => p.user === currentUser.username);
 
     // Keep post count in sync
     const statEls = document.querySelectorAll(".posts-followers-following p");
@@ -74,8 +74,8 @@ function renderGrid() {
         return;
     }
 
-    mine.forEach(post => {
-        const likes    = (post.likes    || []).length;
+    mine.slice().reverse().forEach(post => {
+        const likes = (post.likes || []).length;
         const comments = (post.comments || []).length;
         const div = document.createElement("div");
         div.classList.add("post");
@@ -96,18 +96,18 @@ function renderGrid() {
 // modal
 function openModal(postId) {
     const posts = JSON.parse(localStorage.getItem("posts")) || [];
-    const post  = posts.find(p => p.id == postId);
+    const post = posts.find(p => p.id == postId);
     if (!post) return;
     const authorPfp = resolveAuthorPfp(post.user);
-    const isLiked   = (post.likes || []).includes(currentUser.username);
+    const isLiked = (post.likes || []).includes(currentUser.username);
     const backdrop = document.createElement("div");
     backdrop.classList.add("post-modal-backdrop");
     backdrop.innerHTML = `
         <div class="post-modal">
             <div class="post-modal-image">
                 ${post.image
-                    ? `<img src="${post.image}" alt="post image">`
-                    : `<div class="modal-text-only">${post.text || ""}</div>`}
+            ? `<img src="${post.image}" alt="post image">`
+            : `<div class="modal-text-only">${post.text || ""}</div>`}
             </div>
             <div class="post-modal-details">
                 <div class="post-modal-header">
@@ -168,7 +168,7 @@ function openModal(postId) {
     deleteBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         let posts = JSON.parse(localStorage.getItem("posts")) || [];
-        posts = posts.filter(p => p.id != postId); 
+        posts = posts.filter(p => p.id != postId);
         localStorage.setItem("posts", JSON.stringify(posts));
         closeModal(backdrop);
         renderGrid();
@@ -242,7 +242,7 @@ function openModal(postId) {
 
     // like
     backdrop.querySelector("#modalLikeBtn").addEventListener("click", () => {
-        const posts   = JSON.parse(localStorage.getItem("posts")) || [];
+        const posts = JSON.parse(localStorage.getItem("posts")) || [];
         const current = posts.find(p => p.id == postId);
         if (!current.likes) current.likes = [];
         const username = currentUser.id;
@@ -253,9 +253,9 @@ function openModal(postId) {
         }
         localStorage.setItem("posts", JSON.stringify(posts));
         const nowLiked = current.likes.includes(username);
-        backdrop.querySelector("#modalLikeImg").src           = nowLiked ? "/media/v3.png" : "/media/empty-heart.png";
+        backdrop.querySelector("#modalLikeImg").src = nowLiked ? "/media/v3.png" : "/media/empty-heart.png";
         backdrop.querySelector("#modalLikeCount").textContent = current.likes.length;
-        backdrop.querySelector("#modalLikesList").innerHTML   = renderLikesList(current.likes);
+        backdrop.querySelector("#modalLikesList").innerHTML = renderLikesList(current.likes);
         renderGrid();
     });
 
@@ -268,22 +268,27 @@ function openModal(postId) {
 function postComment(postId, input, backdrop) {
     const text = input.value.trim();
     if (!text) return;
-    const posts   = JSON.parse(localStorage.getItem("posts")) || [];
+    const posts = JSON.parse(localStorage.getItem("posts")) || [];
     const current = posts.find(p => p.id == postId);
     if (!current.comments) current.comments = [];
     const commentObj = {
-        user:       currentUser.username,
+        user: currentUser.id,
         profilePic: currentUser.profilePicture || localStorage.getItem("userProfilePic") || "media/emptypfp.jpg",
         text,
-        time:       new Date().toLocaleString()
+        time: new Date().toLocaleString()
     };
     current.comments.push(commentObj);
     localStorage.setItem("posts", JSON.stringify(posts));
 
     const commentsDiv = backdrop.querySelector("#modalComments");
-    const el = document.createElement("div");
-    el.innerHTML = renderSingleComment(commentObj);
-    commentsDiv.appendChild(el.firstElementChild);
+
+    commentsDiv.innerHTML = ""; // clear the "No comments yet" text
+    current.comments.forEach(c => {
+        const el = document.createElement("div");
+        el.innerHTML = renderSingleComment(c);
+        commentsDiv.appendChild(el.firstElementChild);
+    });
+
     commentsDiv.scrollTop = commentsDiv.scrollHeight;
     backdrop.querySelector("#modalCommentCount").textContent = current.comments.length;
     input.value = "";
@@ -292,7 +297,7 @@ function postComment(postId, input, backdrop) {
 
 function closeModal(backdrop) {
     backdrop.style.transition = "opacity 0.15s ease";
-    backdrop.style.opacity    = "0";
+    backdrop.style.opacity = "0";
     setTimeout(() => backdrop.remove(), 150);
 }
 
@@ -332,6 +337,6 @@ function resolveAuthorPfp(username) {
         return localStorage.getItem("userProfilePic") || currentUser.profilePicture || null;
     }
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user  = users.find(u => u.username === username);
+    const user = users.find(u => u.username === username);
     return (user && user.profilePicture !== "default.png") ? user.profilePicture : null;
 }

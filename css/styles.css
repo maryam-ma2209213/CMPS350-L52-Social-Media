@@ -865,6 +865,16 @@ option:not([value=""]) {
 .post-overlay .overlay-stat span {
   font-size: 1rem;
 }
+.post {
+  position: relative;
+  z-index: 1;
+}
+.post-overlay{
+  z-index: 2;
+  pointer-events: none;
+}
+
+
 
 /* for other-profile.html */
 .follow-btn,
