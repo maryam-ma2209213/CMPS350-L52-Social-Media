@@ -19,7 +19,7 @@ if (posts.length === 0) {
             ${localStorage.getItem("userProfilePic") ?
                 `<img class="userPfpImage" src="${localStorage.getItem("userProfilePic")}" alt="user profile picture">`
                 : ""}
-        <h6 class="post-owner">${post.user}</h6>
+        <h6 class="post-owner" id="username-feed-h6">${post.user}</h6>
         </div>
         <div class="user-right">
             <i class="fa-regular fa-pen-to-square edit-icon"></i>

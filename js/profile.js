@@ -93,7 +93,7 @@ function renderGrid() {
     });
 }
 
-// modal
+// modal (popup post with details)
 function openModal(postId) {
     const posts = JSON.parse(localStorage.getItem("posts")) || [];
     const post = posts.find(p => p.id == postId);
