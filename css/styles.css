@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap");
 :root {
   /* Color Scheme
   --color-bg: #eacdc2;
@@ -9,7 +10,7 @@
   --color-accent: #b75d69;
   --color-border: #ddd; */
   /* Color Scheme */
-  --color-bg: #7a8fa5; /* fixed light blue */
+  --color-bg: #7a8fa5;
   --color-surface: #e0d4c3;
   --color-primary: #1a1423;
   --color-secondary: #13273f;
@@ -19,7 +20,7 @@
   --color-border: #ddd;
 
   /* Font Family */
-  --font-main: "Inter", Arial, sans-serif;
+  --font-main: --font-main: "Inter", Arial, sans-serif;
   --font-heading: "Poppins", Arial, sans-serif;
 
   /* Font Size */
@@ -59,10 +60,11 @@ body {
 body {
   margin: 0;
   min-height: 100vh;
-  /* background: linear-gradient(125deg, var(--color-text-muted), var(--color-bg)); */
   background: var(--color-bg);
   font-size: var(--font-size-body);
   color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  font-family: "Inter", sans-serif;
 }
 
 main {
@@ -72,7 +74,7 @@ main {
 h1,
 h2,
 h3 {
-  font-family: var(--font-heading);
+  font-family: "Poppins", sans-serif;
 }
 
 .auth-section {
@@ -545,17 +547,11 @@ input:focus {
 /* Edit Profile Form */
 .edit-profile-body {
   background: var(--color-bg);
-  /* background-image: linear-gradient(
-    -25deg,
-    var(--color-bg),
-    var(--color-accent),
-    var(--color-text-muted)
-  ); */
 }
 
 #edit-prof-h2 {
   margin: 1.5rem;
-  color: var(--color-surface);
+  color: var(--color-secondary);
 }
 
 .edit-profile-section {
@@ -565,33 +561,12 @@ input:focus {
   margin: 0 auto;
 }
 
-/* for now */
-/* #profile-pic,
-.edit-profile-form #username,
-.edit-profile-form #about-you,
-.edit-profile-form #gender {
-  font-family: inherit;
-  font-style: oblique;
-  margin-left: 1.5rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px;
-  border-radius: 10px;
-  color: var(--color-surface);
-} */
-
-/* option:not([value=""]) {
-  color: var(--color-surface);
-  background-color: var(--color-accent);
-} */
-
 .edit-profile-form #username::placeholder,
 .edit-profile-form #profile-pic,
 .edit-profile-form #aboutyou-edit {
-  color: var(--color-surface);
+  color: var(--color-text-muted);
   font-weight: 100;
   font-style: normal;
-  opacity: 80%;
 }
 
 .edit-profile-section {
@@ -607,14 +582,10 @@ input:focus {
   align-items: center;
   flex-direction: column;
   width: 70%;
-  background-image: linear-gradient(
-    -25deg,
-    var(--color-bg),
-    var(--color-accent),
-    var(--color-text-muted)
-  );
-  box-shadow: var(--shadow-sm);
-  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-accent);
   overflow: hidden;
   margin: 1rem auto;
   max-width: 600px;
@@ -630,7 +601,7 @@ input:focus {
 .edit-profile-form label {
   display: block;
   font-weight: 700;
-  color: var(--color-surface);
+  color: var(--color-text-muted);
   font-style: oblique;
   margin-bottom: 8px;
   text-align: left;
@@ -646,9 +617,11 @@ input:focus {
   box-sizing: border-box;
   padding: 12px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(93, 7, 7, 0.479);
+  /* border: 0.5px solid var(--color-accent); */
   background: rgba(255, 255, 255, 0.08);
-  color: var(--color-surface);
+  color: var(--color-text-muted);
+  opacity: 80%;
   font-family: inherit;
   font-style: oblique;
   font-size: var(--font-size-body);
@@ -677,8 +650,8 @@ input:focus {
 }
 
 option:not([value=""]) {
-  color: var(--color-surface);
-  background-color: var(--color-accent);
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
 }
 
 .pfp-edit-div,
@@ -697,20 +670,36 @@ option:not([value=""]) {
   border-style: none;
   margin: 1rem 0.25rem;
   padding: 0.4rem 1rem;
+  margin-bottom: 1.5rem;
   border-radius: 4px;
   background-color: var(--color-accent);
   cursor: pointer;
 }
 
 .submit-btn:hover {
-  background: var(--color-bg);
-  color: var(--color-primary);
+  background: var(--color-text-muted);
+  color: var(--color-border);
 }
 
-/* For profile.html */
+.submit-btn:active {
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+}
+
+/* For user-profile.html and other-profile.html */
 .username-div,
 .profile-pic-div {
-  margin-left: 4.5rem;
+  justify-self: center;
+}
+#username-h3 {
+  font-family: inherit;
+  color: var(--color-text-muted);
+}
+
+.profile-pic-div img {
+  margin-top: 2rem;
+  border-radius: 50%;
+  border: 3.5px solid var(--color-text-muted);
 }
 
 .about-you-div,
@@ -718,12 +707,19 @@ option:not([value=""]) {
   display: flex;
   justify-content: center;
   margin-bottom: 0;
+  color: var(--color-text-muted);
+}
+.about-you-div #about-you {
+  overflow-wrap: break-word;
+  max-width: 300px;
+  padding: 10px;
 }
 
 .posts-followers-following {
   display: flex;
   justify-content: center;
   gap: 10px;
+  color: var(--color-text-muted);
 }
 
 .profile-info.div {
@@ -741,18 +737,7 @@ option:not([value=""]) {
   margin: auto;
   padding: 10px;
   padding-bottom: 70px;
-}
-
-/* unedited ver */
-.user-posts-div .post {
-  background-color: var(--color-surface);
-  padding: 1.5rem 1rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
-  width: 70%;
-  height: 100%;
-  margin: 0 auto;
+  gap: 80px;
 }
 
 /* for image/video posts */
@@ -767,14 +752,10 @@ option:not([value=""]) {
   aspect-ratio: 1 / 1;
 }
 
-/* end of unedited */
-
-/* construction site start */
-
 /* posts in polaroid style */
 .user-posts-div .post {
-  background-color: #fdf8f2;
-  padding: 0.75rem 0.75rem 2.5rem 0.75rem;
+  background-color: var(--color-surface);
+  padding: 0.75rem 0.75rem 2.75rem 0.75rem;
   border-radius: 2px;
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.18),
@@ -818,7 +799,8 @@ option:not([value=""]) {
   transform: translateX(-50%) rotate(-2deg);
   width: 48px;
   height: 18px;
-  background: rgba(255, 235, 180, 0.72);
+  /* background: rgba(255, 235, 180, 0.72); */
+  background: rgba(107, 74, 58, 0.72);
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   z-index: 2;
@@ -867,8 +849,6 @@ option:not([value=""]) {
   font-size: 1rem;
 }
 
-/* construction site end */
-
 /* for other-profile.html */
 .follow-btn,
 #edit-prof-link {
@@ -877,21 +857,24 @@ option:not([value=""]) {
   justify-self: center;
   margin: 10px;
   padding: 0.5rem 1rem;
+  margin-bottom: 30px;
   border-radius: 4px;
   border: none;
-  background: var(--color-text-muted);
+  background: var(--color-accent);
   color: var(--color-surface);
 }
 
 .follow-btn:hover,
 #edit-prof-link:hover {
   cursor: pointer;
+  background-color: var(--color-text-muted);
   color: var(--color-border);
 }
 
 .follow-btn:active,
 #edit-prof-link:active {
   background-color: var(--color-accent);
+  color: var(--color-surface);
 }
 
 /* navbar styling */
@@ -910,7 +893,7 @@ option:not([value=""]) {
 
 /* Sidebar styling */
 .side {
-  background-color: #1a1423;
+  background-color: var(--color-secondary);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -933,7 +916,8 @@ option:not([value=""]) {
 .page-links a {
   display: flex;
   align-items: center;
-  color: #ba9ed7;
+  /* color: #ba9ed7; */
+  color: var(--color-bg);
   text-decoration: none;
   padding: 10px 15px;
   border-radius: var(--radius-sm);
@@ -941,7 +925,7 @@ option:not([value=""]) {
 }
 
 .page-links a:hover {
-  color: var(--color-accent);
+  color: var(--color-text-muted);
   transform: scale(1.1);
 }
 
@@ -1033,7 +1017,7 @@ option:not([value=""]) {
 .btn-danger:hover {
   background: #ff1a1a;
 }
-/* under construction! */
+
 /* modal styles */
 .post-modal-backdrop {
   position: fixed;
@@ -1112,7 +1096,7 @@ option:not([value=""]) {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #fdf8f2;
+  background: var(--color-surface);
 }
 
 /* header */
@@ -1134,7 +1118,7 @@ option:not([value=""]) {
 .post-modal-header .modal-username {
   font-weight: 700;
   font-size: 0.9rem;
-  color: var(--color-primary);
+  color: var(--color-text-muted);
   flex: 1;
 }
 
@@ -1155,7 +1139,7 @@ option:not([value=""]) {
 .post-modal-caption {
   padding: 12px 16px;
   font-size: 0.9rem;
-  color: var(--color-text-main);
+  color: var(--color-text-muted);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -1240,7 +1224,7 @@ option:not([value=""]) {
 }
 
 .modal-stats strong {
-  color: var(--color-primary);
+  color: var(--color-text-muted);
   cursor: pointer;
 }
 
@@ -1258,12 +1242,11 @@ option:not([value=""]) {
   font-size: 18px;
 }
 
-/* THIS is the important part */
 .modal-options .dropdown {
   position: absolute;
   top: 30px;
   right: 0;
-  background: rgb(247, 244, 238);
+  background-color: var(--color-surface);
   border-radius: 10px;
   padding: 6px 0;
   width: 120px;
@@ -1284,12 +1267,11 @@ option:not([value=""]) {
   background-color: #f5f5f5;
 }
 
-/* optional: make delete red */
 .dropdown .delete-btn {
   color: #e74c3c;
 }
 
-/* Likes list (who liked) */
+/* likes (who liked) */
 .modal-likes-list {
   font-size: 0.8rem;
   color: var(--color-text-muted);
@@ -1297,7 +1279,6 @@ option:not([value=""]) {
   line-height: 1.5;
 }
 
-/* Add comment row */
 .post-modal-add-comment {
   display: flex;
   align-items: center;
@@ -1311,10 +1292,10 @@ option:not([value=""]) {
   border: none;
   background: transparent;
   font-size: 0.88rem;
-  color: var(--color-text-main);
+  color: var(--color-text);
   outline: none;
   padding: 4px 0;
-  transform: none; /* override global input:focus scale */
+  transform: none;
 }
 
 .post-modal-add-comment input::placeholder {
@@ -1438,6 +1419,11 @@ option:not([value=""]) {
   .feed-section {
     margin: var(--spacing-md) 100px;
   }
+  .about-you-div #about-you {
+    overflow-wrap: break-word;
+    max-width: 500px;
+    padding: 10px;
+  }
 }
 
 /* Desktop View */
@@ -1481,8 +1467,8 @@ option:not([value=""]) {
 
   .user-posts-div {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
     padding-bottom: 80px;
   }
 
@@ -1524,5 +1510,11 @@ option:not([value=""]) {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .about-you-div #about-you {
+    overflow-wrap: break-word;
+    max-width: 700px;
+    padding: 10px;
   }
 }
