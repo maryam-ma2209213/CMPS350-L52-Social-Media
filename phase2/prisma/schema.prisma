@@ -18,6 +18,7 @@ model User {
   email     String    @unique
   password  String
   bio       String? //can be null
+  avatar    String?
   createdAt DateTime  @default(now())
   posts     Post[]
   comments  Comment[]
@@ -28,7 +29,7 @@ model User {
 
 model Post {
   id        Int       @id @default(autoincrement())
-  caption   String
+  caption   String?
   image     String?
   createdAt DateTime  @default(now())
   authorId  Int       @default(1) //default(1) added from lab
@@ -45,8 +46,11 @@ model Comment {
   authorId Int  @default(1)
   author   User @relation(fields: [authorId], references: [id])
 
-  postId Int  @default(1)
-  post   Post @relation(fields: [postId], references: [id])
+  postId   Int       @default(1)
+  post     Post      @relation(fields: [postId], references: [id])
+  parentId Int?
+  parent   Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies  Comment[] @relation("CommentReplies")
 }
 
 model Like {

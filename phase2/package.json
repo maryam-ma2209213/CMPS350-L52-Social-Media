@@ -2,6 +2,7 @@
   "name": "cmps350-phase2",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,8 +14,13 @@
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
+  "prisma": {
+        "seed": "node prisma/seed.js"
+    },
   "devDependencies": {
+    "@prisma/client": "^6.19.3",
     "eslint": "^9",
-    "eslint-config-next": "16.2.4"
+    "eslint-config-next": "16.2.4",
+    "prisma": "^6.19.3"
   }
 }

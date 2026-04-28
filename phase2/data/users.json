@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "username": "sara_m1",
+    "email": "sara_m1@example.com",
+    "password": "hashed_pw_1",
+    "bio": "Gym rat \ud83d\udcaa",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-11-24T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "username": "john_d2",
+    "email": "john_d2@example.com",
+    "password": "hashed_pw_2",
+    "bio": "Sports fanatic \u26bd",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-01-13T00:00:00Z"
+  },
+  {
+    "id": 3,
+    "username": "lina_k3",
+    "email": "lina_k3@example.com",
+    "password": "hashed_pw_3",
+    "bio": "Music is life \ud83c\udfb5",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-05-21T00:00:00Z"
+  },
+  {
+    "id": 4,
+    "username": "omar_x4",
+    "email": "omar_x4@example.com",
+    "password": "hashed_pw_4",
+    "bio": "Art & design \ud83c\udfa8",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-04-25T00:00:00Z"
+  },
+  {
+    "id": 5,
+    "username": "maya_r5",
+    "email": "maya_r5@example.com",
+    "password": "hashed_pw_5",
+    "bio": "Minimalist \ud83e\udd0d",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-02-22T00:00:00Z"
+  },
+  {
+    "id": 6,
+    "username": "alex_p6",
+    "email": "alex_p6@example.com",
+    "password": "hashed_pw_6",
+    "bio": "Travel & food enthusiast \ud83c\udf0d",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-10-07T00:00:00Z"
+  },
+  {
+    "id": 7,
+    "username": "nour_h7",
+    "email": "nour_h7@example.com",
+    "password": "hashed_pw_7",
+    "bio": "Creative soul \ud83c\udfad",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-10-30T00:00:00Z"
+  },
+  {
+    "id": 8,
+    "username": "ziad_b8",
+    "email": "ziad_b8@example.com",
+    "password": "hashed_pw_8",
+    "bio": "Photography lover \ud83d\udcf8",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-01-17T00:00:00Z"
+  },
+  {
+    "id": 9,
+    "username": "hana_s9",
+    "email": "hana_s9@example.com",
+    "password": "hashed_pw_9",
+    "bio": "Bookworm \ud83d\udcda",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-02-17T00:00:00Z"
+  },
+  {
+    "id": 10,
+    "username": "kareem_j10",
+    "email": "kareem_j10@example.com",
+    "password": "hashed_pw_10",
+    "bio": "Dog lover \ud83d\udc36",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-04-30T00:00:00Z"
+  },
+  {
+    "id": 11,
+    "username": "reem_l11",
+    "email": "reem_l11@example.com",
+    "password": "hashed_pw_11",
+    "bio": "Photography lover \ud83d\udcf8",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-11-05T00:00:00Z"
+  },
+  {
+    "id": 12,
+    "username": "faris_n12",
+    "email": "faris_n12@example.com",
+    "password": "hashed_pw_12",
+    "bio": "Bookworm \ud83d\udcda",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-10-15T00:00:00Z"
+  },
+  {
+    "id": 13,
+    "username": "dana_t13",
+    "email": "dana_t13@example.com",
+    "password": "hashed_pw_13",
+    "bio": "Overthinker \ud83e\udde0",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-11-29T00:00:00Z"
+  },
+  {
+    "id": 14,
+    "username": "yousef_w14",
+    "email": "yousef_w14@example.com",
+    "password": "hashed_pw_14",
+    "bio": "Creative soul \ud83c\udfad",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-10-07T00:00:00Z"
+  },
+  {
+    "id": 15,
+    "username": "layla_f15",
+    "email": "layla_f15@example.com",
+    "password": "hashed_pw_15",
+    "bio": "Cat person \ud83d\udc31",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-04-23T00:00:00Z"
+  },
+  {
+    "id": 16,
+    "username": "ahmed_g16",
+    "email": "ahmed_g16@example.com",
+    "password": "hashed_pw_16",
+    "bio": "Foodie first \ud83c\udf55",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-10-29T00:00:00Z"
+  },
+  {
+    "id": 17,
+    "username": "mia_a17",
+    "email": "mia_a17@example.com",
+    "password": "hashed_pw_17",
+    "bio": "Gamer \ud83c\udfae",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-01-04T00:00:00Z"
+  },
+  {
+    "id": 18,
+    "username": "hassan_c18",
+    "email": "hassan_c18@example.com",
+    "password": "hashed_pw_18",
+    "bio": "Overthinker \ud83e\udde0",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-03-23T00:00:00Z"
+  },
+  {
+    "id": 19,
+    "username": "aya_e19",
+    "email": "aya_e19@example.com",
+    "password": "hashed_pw_19",
+    "bio": "Just vibing \u2728",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-08-05T00:00:00Z"
+  },
+  {
+    "id": 20,
+    "username": "tariq_o20",
+    "email": "tariq_o20@example.com",
+    "password": "hashed_pw_20",
+    "bio": "Art & design \ud83c\udfa8",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-05-23T00:00:00Z"
+  },
+  {
+    "id": 21,
+    "username": "sana_m21",
+    "email": "sana_m21@example.com",
+    "password": "hashed_pw_21",
+    "bio": "Gamer \ud83c\udfae",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-04-21T00:00:00Z"
+  },
+  {
+    "id": 22,
+    "username": "bilal_d22",
+    "email": "bilal_d22@example.com",
+    "password": "hashed_pw_22",
+    "bio": "Gym rat \ud83d\udcaa",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-06-22T00:00:00Z"
+  },
+  {
+    "id": 23,
+    "username": "dina_k23",
+    "email": "dina_k23@example.com",
+    "password": "hashed_pw_23",
+    "bio": "Fitness freak \ud83c\udfcb\ufe0f",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-02-17T00:00:00Z"
+  },
+  {
+    "id": 24,
+    "username": "rami_x24",
+    "email": "rami_x24@example.com",
+    "password": "hashed_pw_24",
+    "bio": "Nature lover \ud83c\udf3f",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-02-19T00:00:00Z"
+  },
+  {
+    "id": 25,
+    "username": "heba_r25",
+    "email": "heba_r25@example.com",
+    "password": "hashed_pw_25",
+    "bio": "Always learning \ud83d\udcd6",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-06-26T00:00:00Z"
+  },
+  {
+    "id": 26,
+    "username": "jad_p26",
+    "email": "jad_p26@example.com",
+    "password": "hashed_pw_26",
+    "bio": "Chef in training \ud83d\udc68\u200d\ud83c\udf73",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-05-16T00:00:00Z"
+  },
+  {
+    "id": 27,
+    "username": "roula_h27",
+    "email": "roula_h27@example.com",
+    "password": "hashed_pw_27",
+    "bio": "Sports fanatic \u26bd",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-01-23T00:00:00Z"
+  },
+  {
+    "id": 28,
+    "username": "khaled_b28",
+    "email": "khaled_b28@example.com",
+    "password": "hashed_pw_28",
+    "bio": "Night owl \ud83e\udd89",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-08-24T00:00:00Z"
+  },
+  {
+    "id": 29,
+    "username": "tala_s29",
+    "email": "tala_s29@example.com",
+    "password": "hashed_pw_29",
+    "bio": "Doha based \ud83c\uddf6\ud83c\udde6",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-03-05T00:00:00Z"
+  },
+  {
+    "id": 30,
+    "username": "samir_j30",
+    "email": "samir_j30@example.com",
+    "password": "hashed_pw_30",
+    "bio": "Travel & food enthusiast \ud83c\udf0d",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-07-13T00:00:00Z"
+  },
+  {
+    "id": 31,
+    "username": "farah_l31",
+    "email": "farah_l31@example.com",
+    "password": "hashed_pw_31",
+    "bio": "Sunset chaser \ud83c\udf05",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-10-10T00:00:00Z"
+  },
+  {
+    "id": 32,
+    "username": "malik_n32",
+    "email": "malik_n32@example.com",
+    "password": "hashed_pw_32",
+    "bio": "Always learning \ud83d\udcd6",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-11-18T00:00:00Z"
+  },
+  {
+    "id": 33,
+    "username": "nisreen_t33",
+    "email": "nisreen_t33@example.com",
+    "password": "hashed_pw_33",
+    "bio": "Morning person \u2600\ufe0f",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-07-05T00:00:00Z"
+  },
+  {
+    "id": 34,
+    "username": "amir_w34",
+    "email": "amir_w34@example.com",
+    "password": "hashed_pw_34",
+    "bio": "Overthinker \ud83e\udde0",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-04-09T00:00:00Z"
+  },
+  {
+    "id": 35,
+    "username": "ghada_f35",
+    "email": "ghada_f35@example.com",
+    "password": "hashed_pw_35",
+    "bio": "Coffee and code \u2615",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-02-05T00:00:00Z"
+  },
+  {
+    "id": 36,
+    "username": "sami_g36",
+    "email": "sami_g36@example.com",
+    "password": "hashed_pw_36",
+    "bio": "Music is life \ud83c\udfb5",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-12-05T00:00:00Z"
+  },
+  {
+    "id": 37,
+    "username": "rana_a37",
+    "email": "rana_a37@example.com",
+    "password": "hashed_pw_37",
+    "bio": "Travel & food enthusiast \ud83c\udf0d",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-05-29T00:00:00Z"
+  },
+  {
+    "id": 38,
+    "username": "wael_c38",
+    "email": "wael_c38@example.com",
+    "password": "hashed_pw_38",
+    "bio": "Movie buff \ud83c\udfac",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-04-30T00:00:00Z"
+  },
+  {
+    "id": 39,
+    "username": "lara_e39",
+    "email": "lara_e39@example.com",
+    "password": "hashed_pw_39",
+    "bio": "Fitness freak \ud83c\udfcb\ufe0f",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-02-21T00:00:00Z"
+  },
+  {
+    "id": 40,
+    "username": "bassem_o40",
+    "email": "bassem_o40@example.com",
+    "password": "hashed_pw_40",
+    "bio": "Cat person \ud83d\udc31",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-05-23T00:00:00Z"
+  },
+  {
+    "id": 41,
+    "username": "mariam_m41",
+    "email": "mariam_m41@example.com",
+    "password": "hashed_pw_41",
+    "bio": "Fashion obsessed \ud83d\udc57",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-11-22T00:00:00Z"
+  },
+  {
+    "id": 42,
+    "username": "faisal_d42",
+    "email": "faisal_d42@example.com",
+    "password": "hashed_pw_42",
+    "bio": "Tech nerd \ud83d\udda5\ufe0f",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-07-06T00:00:00Z"
+  },
+  {
+    "id": 43,
+    "username": "ruba_k43",
+    "email": "ruba_k43@example.com",
+    "password": "hashed_pw_43",
+    "bio": "Nature lover \ud83c\udf3f",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-07-09T00:00:00Z"
+  },
+  {
+    "id": 44,
+    "username": "nader_x44",
+    "email": "nader_x44@example.com",
+    "password": "hashed_pw_44",
+    "bio": "Minimalist \ud83e\udd0d",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-04-18T00:00:00Z"
+  },
+  {
+    "id": 45,
+    "username": "shireen_r45",
+    "email": "shireen_r45@example.com",
+    "password": "hashed_pw_45",
+    "bio": "Overthinker \ud83e\udde0",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-05-17T00:00:00Z"
+  },
+  {
+    "id": 46,
+    "username": "walid_p46",
+    "email": "walid_p46@example.com",
+    "password": "hashed_pw_46",
+    "bio": "Living my best life \ud83c\udf1f",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-12-16T00:00:00Z"
+  },
+  {
+    "id": 47,
+    "username": "yasmine_h47",
+    "email": "yasmine_h47@example.com",
+    "password": "hashed_pw_47",
+    "bio": "Always learning \ud83d\udcd6",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-02-06T00:00:00Z"
+  },
+  {
+    "id": 48,
+    "username": "elie_b48",
+    "email": "elie_b48@example.com",
+    "password": "hashed_pw_48",
+    "bio": "Tech nerd \ud83d\udda5\ufe0f",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-11-22T00:00:00Z"
+  },
+  {
+    "id": 49,
+    "username": "hind_s49",
+    "email": "hind_s49@example.com",
+    "password": "hashed_pw_49",
+    "bio": "Sports fanatic \u26bd",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-10-01T00:00:00Z"
+  },
+  {
+    "id": 50,
+    "username": "tarek_j50",
+    "email": "tarek_j50@example.com",
+    "password": "hashed_pw_50",
+    "bio": "Tech nerd \ud83d\udda5\ufe0f",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-05-06T00:00:00Z"
+  },
+  {
+    "id": 51,
+    "username": "zeina_l51",
+    "email": "zeina_l51@example.com",
+    "password": "hashed_pw_51",
+    "bio": "Fitness freak \ud83c\udfcb\ufe0f",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-08-25T00:00:00Z"
+  },
+  {
+    "id": 52,
+    "username": "badr_n52",
+    "email": "badr_n52@example.com",
+    "password": "hashed_pw_52",
+    "bio": "Doha based \ud83c\uddf6\ud83c\udde6",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-05-19T00:00:00Z"
+  },
+  {
+    "id": 53,
+    "username": "salma_t53",
+    "email": "salma_t53@example.com",
+    "password": "hashed_pw_53",
+    "bio": "Overthinker \ud83e\udde0",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-11-24T00:00:00Z"
+  },
+  {
+    "id": 54,
+    "username": "mohamad_w54",
+    "email": "mohamad_w54@example.com",
+    "password": "hashed_pw_54",
+    "bio": "Music is life \ud83c\udfb5",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-10-13T00:00:00Z"
+  },
+  {
+    "id": 55,
+    "username": "rita_f55",
+    "email": "rita_f55@example.com",
+    "password": "hashed_pw_55",
+    "bio": "Just vibing \u2728",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-12-17T00:00:00Z"
+  },
+  {
+    "id": 56,
+    "username": "adel_g56",
+    "email": "adel_g56@example.com",
+    "password": "hashed_pw_56",
+    "bio": "Music is life \ud83c\udfb5",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-01-29T00:00:00Z"
+  },
+  {
+    "id": 57,
+    "username": "rania_a57",
+    "email": "rania_a57@example.com",
+    "password": "hashed_pw_57",
+    "bio": "Chef in training \ud83d\udc68\u200d\ud83c\udf73",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-01-17T00:00:00Z"
+  },
+  {
+    "id": 58,
+    "username": "charbel_c58",
+    "email": "charbel_c58@example.com",
+    "password": "hashed_pw_58",
+    "bio": "Fitness freak \ud83c\udfcb\ufe0f",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-06-11T00:00:00Z"
+  },
+  {
+    "id": 59,
+    "username": "mona_e59",
+    "email": "mona_e59@example.com",
+    "password": "hashed_pw_59",
+    "bio": "Travel & food enthusiast \ud83c\udf0d",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-05-18T00:00:00Z"
+  },
+  {
+    "id": 60,
+    "username": "riad_o60",
+    "email": "riad_o60@example.com",
+    "password": "hashed_pw_60",
+    "bio": "Doha based \ud83c\uddf6\ud83c\udde6",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-04-19T00:00:00Z"
+  },
+  {
+    "id": 61,
+    "username": "abeer_m61",
+    "email": "abeer_m61@example.com",
+    "password": "hashed_pw_61",
+    "bio": "Traveler \u2708\ufe0f",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-10-18T00:00:00Z"
+  },
+  {
+    "id": 62,
+    "username": "samer_d62",
+    "email": "samer_d62@example.com",
+    "password": "hashed_pw_62",
+    "bio": "Bookworm \ud83d\udcda",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-06-11T00:00:00Z"
+  },
+  {
+    "id": 63,
+    "username": "joelle_k63",
+    "email": "joelle_k63@example.com",
+    "password": "hashed_pw_63",
+    "bio": "Adventure seeker \ud83c\udfd4\ufe0f",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-12-02T00:00:00Z"
+  },
+  {
+    "id": 64,
+    "username": "nabil_x64",
+    "email": "nabil_x64@example.com",
+    "password": "hashed_pw_64",
+    "bio": "Traveler \u2708\ufe0f",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-07-22T00:00:00Z"
+  },
+  {
+    "id": 65,
+    "username": "sawsan_r65",
+    "email": "sawsan_r65@example.com",
+    "password": "hashed_pw_65",
+    "bio": "Cat person \ud83d\udc31",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-11-26T00:00:00Z"
+  },
+  {
+    "id": 66,
+    "username": "ghassan_p66",
+    "email": "ghassan_p66@example.com",
+    "password": "hashed_pw_66",
+    "bio": "Foodie first \ud83c\udf55",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-03-15T00:00:00Z"
+  },
+  {
+    "id": 67,
+    "username": "nadine_h67",
+    "email": "nadine_h67@example.com",
+    "password": "hashed_pw_67",
+    "bio": "Music is life \ud83c\udfb5",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-03-13T00:00:00Z"
+  },
+  {
+    "id": 68,
+    "username": "toufic_b68",
+    "email": "toufic_b68@example.com",
+    "password": "hashed_pw_68",
+    "bio": "Night owl \ud83e\udd89",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-10-15T00:00:00Z"
+  },
+  {
+    "id": 69,
+    "username": "manal_s69",
+    "email": "manal_s69@example.com",
+    "password": "hashed_pw_69",
+    "bio": "Sports fanatic \u26bd",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-05-15T00:00:00Z"
+  },
+  {
+    "id": 70,
+    "username": "ramzi_j70",
+    "email": "ramzi_j70@example.com",
+    "password": "hashed_pw_70",
+    "bio": "Creative soul \ud83c\udfad",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-10-27T00:00:00Z"
+  },
+  {
+    "id": 71,
+    "username": "hala_l71",
+    "email": "hala_l71@example.com",
+    "password": "hashed_pw_71",
+    "bio": "Fitness freak \ud83c\udfcb\ufe0f",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-10-26T00:00:00Z"
+  },
+  {
+    "id": 72,
+    "username": "imad_n72",
+    "email": "imad_n72@example.com",
+    "password": "hashed_pw_72",
+    "bio": "Music is life \ud83c\udfb5",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-07-05T00:00:00Z"
+  },
+  {
+    "id": 73,
+    "username": "soha_t73",
+    "email": "soha_t73@example.com",
+    "password": "hashed_pw_73",
+    "bio": "Dog lover \ud83d\udc36",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-03-12T00:00:00Z"
+  },
+  {
+    "id": 74,
+    "username": "nizar_w74",
+    "email": "nizar_w74@example.com",
+    "password": "hashed_pw_74",
+    "bio": "Travel & food enthusiast \ud83c\udf0d",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-09-10T00:00:00Z"
+  },
+  {
+    "id": 75,
+    "username": "carla_f75",
+    "email": "carla_f75@example.com",
+    "password": "hashed_pw_75",
+    "bio": "Movie buff \ud83c\udfac",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-01-25T00:00:00Z"
+  },
+  {
+    "id": 76,
+    "username": "rabih_g76",
+    "email": "rabih_g76@example.com",
+    "password": "hashed_pw_76",
+    "bio": "Art & design \ud83c\udfa8",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-02-26T00:00:00Z"
+  },
+  {
+    "id": 77,
+    "username": "wissam_a77",
+    "email": "wissam_a77@example.com",
+    "password": "hashed_pw_77",
+    "bio": "Tech nerd \ud83d\udda5\ufe0f",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-11-18T00:00:00Z"
+  },
+  {
+    "id": 78,
+    "username": "joanna_c78",
+    "email": "joanna_c78@example.com",
+    "password": "hashed_pw_78",
+    "bio": "Creative soul \ud83c\udfad",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-12-15T00:00:00Z"
+  },
+  {
+    "id": 79,
+    "username": "fady_e79",
+    "email": "fady_e79@example.com",
+    "password": "hashed_pw_79",
+    "bio": "Travel & food enthusiast \ud83c\udf0d",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-11-02T00:00:00Z"
+  },
+  {
+    "id": 80,
+    "username": "suha_o80",
+    "email": "suha_o80@example.com",
+    "password": "hashed_pw_80",
+    "bio": "Fitness freak \ud83c\udfcb\ufe0f",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-07-17T00:00:00Z"
+  },
+  {
+    "id": 81,
+    "username": "elias_m81",
+    "email": "elias_m81@example.com",
+    "password": "hashed_pw_81",
+    "bio": "Cat person \ud83d\udc31",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-11-02T00:00:00Z"
+  },
+  {
+    "id": 82,
+    "username": "mira_d82",
+    "email": "mira_d82@example.com",
+    "password": "hashed_pw_82",
+    "bio": "Foodie first \ud83c\udf55",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-09-28T00:00:00Z"
+  },
+  {
+    "id": 83,
+    "username": "george_k83",
+    "email": "george_k83@example.com",
+    "password": "hashed_pw_83",
+    "bio": "Movie buff \ud83c\udfac",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-10-11T00:00:00Z"
+  },
+  {
+    "id": 84,
+    "username": "lynn_x84",
+    "email": "lynn_x84@example.com",
+    "password": "hashed_pw_84",
+    "bio": "Minimalist \ud83e\udd0d",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-01-06T00:00:00Z"
+  },
+  {
+    "id": 85,
+    "username": "tony_r85",
+    "email": "tony_r85@example.com",
+    "password": "hashed_pw_85",
+    "bio": "Minimalist \ud83e\udd0d",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-02-28T00:00:00Z"
+  },
+  {
+    "id": 86,
+    "username": "nadia_p86",
+    "email": "nadia_p86@example.com",
+    "password": "hashed_pw_86",
+    "bio": "Gamer \ud83c\udfae",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-10-02T00:00:00Z"
+  },
+  {
+    "id": 87,
+    "username": "chadi_h87",
+    "email": "chadi_h87@example.com",
+    "password": "hashed_pw_87",
+    "bio": "Gamer \ud83c\udfae",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-05-17T00:00:00Z"
+  },
+  {
+    "id": 88,
+    "username": "may_b88",
+    "email": "may_b88@example.com",
+    "password": "hashed_pw_88",
+    "bio": "Just vibing \u2728",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-11-25T00:00:00Z"
+  },
+  {
+    "id": 89,
+    "username": "pierre_s89",
+    "email": "pierre_s89@example.com",
+    "password": "hashed_pw_89",
+    "bio": "Sunset chaser \ud83c\udf05",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-02-27T00:00:00Z"
+  },
+  {
+    "id": 90,
+    "username": "lama_j90",
+    "email": "lama_j90@example.com",
+    "password": "hashed_pw_90",
+    "bio": "Tech nerd \ud83d\udda5\ufe0f",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-08-11T00:00:00Z"
+  },
+  {
+    "id": 91,
+    "username": "issam_l91",
+    "email": "issam_l91@example.com",
+    "password": "hashed_pw_91",
+    "bio": "Photography lover \ud83d\udcf8",
+    "avatar": "/media/avatars/avatar2.jpg",
+    "createdAt": "2023-08-21T00:00:00Z"
+  },
+  {
+    "id": 92,
+    "username": "celine_n92",
+    "email": "celine_n92@example.com",
+    "password": "hashed_pw_92",
+    "bio": "Dog lover \ud83d\udc36",
+    "avatar": "/media/avatars/avatar3.jpg",
+    "createdAt": "2023-05-15T00:00:00Z"
+  },
+  {
+    "id": 93,
+    "username": "marwan_t93",
+    "email": "marwan_t93@example.com",
+    "password": "hashed_pw_93",
+    "bio": "Dog lover \ud83d\udc36",
+    "avatar": "/media/avatars/avatar4.jpg",
+    "createdAt": "2023-04-02T00:00:00Z"
+  },
+  {
+    "id": 94,
+    "username": "sandra_w94",
+    "email": "sandra_w94@example.com",
+    "password": "hashed_pw_94",
+    "bio": "Movie buff \ud83c\udfac",
+    "avatar": "/media/avatars/avatar5.jpg",
+    "createdAt": "2023-02-24T00:00:00Z"
+  },
+  {
+    "id": 95,
+    "username": "ihab_f95",
+    "email": "ihab_f95@example.com",
+    "password": "hashed_pw_95",
+    "bio": "Sunset chaser \ud83c\udf05",
+    "avatar": "/media/avatars/avatar6.jpg",
+    "createdAt": "2023-11-17T00:00:00Z"
+  },
+  {
+    "id": 96,
+    "username": "pamela_g96",
+    "email": "pamela_g96@example.com",
+    "password": "hashed_pw_96",
+    "bio": "Dog lover \ud83d\udc36",
+    "avatar": "/media/avatars/avatar7.jpg",
+    "createdAt": "2023-11-24T00:00:00Z"
+  },
+  {
+    "id": 97,
+    "username": "alain_a97",
+    "email": "alain_a97@example.com",
+    "password": "hashed_pw_97",
+    "bio": "Bookworm \ud83d\udcda",
+    "avatar": "/media/avatars/avatar8.jpg",
+    "createdAt": "2023-11-08T00:00:00Z"
+  },
+  {
+    "id": 98,
+    "username": "christine_c98",
+    "email": "christine_c98@example.com",
+    "password": "hashed_pw_98",
+    "bio": "Nature lover \ud83c\udf3f",
+    "avatar": "/media/avatars/avatar9.jpg",
+    "createdAt": "2023-03-20T00:00:00Z"
+  },
+  {
+    "id": 99,
+    "username": "elio_e99",
+    "email": "elio_e99@example.com",
+    "password": "hashed_pw_99",
+    "bio": "Night owl \ud83e\udd89",
+    "avatar": "/media/avatars/avatar10.jpg",
+    "createdAt": "2023-03-24T00:00:00Z"
+  },
+  {
+    "id": 100,
+    "username": "stephanie_o100",
+    "email": "stephanie_o100@example.com",
+    "password": "hashed_pw_100",
+    "bio": "Doha based \ud83c\uddf6\ud83c\udde6",
+    "avatar": "/media/avatars/avatar1.jpg",
+    "createdAt": "2023-09-29T00:00:00Z"
+  }
+]
