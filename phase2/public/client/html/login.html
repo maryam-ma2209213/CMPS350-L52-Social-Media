@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body class="auth-body">
+    <main class="auth-layout">
+        <section class="auth-section">
+            <div class="banner-content">
+                <img src="media/logo.png" alt="CAMDEE" class="platform-logo">
+                <p class="platform-slogan">Connect with Friends</p>
+            </div>
+        </section>
+
+        <!-- Right Panel for Login Page -->
+         <section class="form-section">
+            <div class="form-card">
+                <header class="form-header">
+                    <h2>Login</h2>
+                    <p>Welcome back</p>
+                </header>
+                <form id="login-form" class="forms">
+                    <!-- <label for="email">Email</label> --> 
+                     <div class="input-style"> 
+                        <input type="email" id="email" name="email" required placeholder="Email"> 
+                    </div> 
+                    <!-- <label for="password">Password</label> --> 
+                     <div class="input-style"> 
+                        <input type="password" id="password" name="password" required placeholder="Password"> 
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+                <footer class="form-footer">
+                    <p>
+                        Don't have an account?
+                        <a href="register.html">Register here</a>
+                    </p>
+                </footer>
+            </div>
+         </section>
+    </main>
+    <script src="js/auth.js"></script>
+</body>
+</html>

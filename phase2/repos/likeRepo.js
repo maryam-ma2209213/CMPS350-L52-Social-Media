@@ -6,36 +6,37 @@
 //   },
 import prisma from "@/lib/prisma";
 class likeRepo {
-    // get likes by postId
-    async getLikesByPost(postId) {
-        return await prisma.like.findMany({
-            where: { postId: Number(postId) },
-            include: { user: true }
-        })
-    }
-    // add/remove likes so toggle
+  // get likes by postId
+  async getLikesByPost(postId) {
+    return await prisma.like.findMany({
+      where: { postId: Number(postId) },
+      include: {
+        user: {
+          select: { id: true, username: true, avatar: true },
+        },
+      },
+    });
+  }
 
-    async toggleLike(postId, userId) {
-        // find if the person liked before or not and if yes save id
-        const exist = await prisma.like.findFirst({
-            where: { postId: Number(postId), userId: Number(userId) }
-        });
-        // if liked before then remove
-        if (exist) {
-            return await prisma.like.delete({
-                where: { id: Number(exist.id) }
-            });
-            // if person has not liked then add like
-        } else {
-            return await prisma.like.create({
-                data: {
-                    postId: Number(postId),
-                    userId: Number(userId)
-                }
-            })
-        }
-    }
+  // add/remove likes (toggle)
+  async toggleLike(postId, userId) {
+    const exist = await prisma.like.findFirst({
+      where: { postId: Number(postId), userId: Number(userId) },
+    });
 
+    if (exist) {
+      await prisma.like.delete({ where: { id: Number(exist.id) } });
+      return { liked: false };
+    } else {
+      await prisma.like.create({
+        data: {
+          postId: Number(postId),
+          userId: Number(userId),
+        },
+      });
+      return { liked: true };
+    }
+  }
 }
 
 export default new likeRepo();

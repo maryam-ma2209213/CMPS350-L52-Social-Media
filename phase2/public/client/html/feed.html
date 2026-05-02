@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Feed</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://kit.fontawesome.com/05b76dde2a.js" crossorigin="anonymous"></script>
+</head>
+<div id="logout-confirm" class="confirm hidden">
+    <div class="confirm-card">
+        <h3>Logout</h3>
+        <p>Are you sure you want to logout?</p>
+
+        <div class="confirm-actions">
+            <button id="cancel-logout" class="btn-secondary">Cancel</button>
+            <button id="confirm-logout" class="btn-danger">Logout</button>
+        </div>
+    </div>
+</div>
+
+<body>
+    <main>
+        <section class="feed-section">
+
+        </section>
+    </main>
+
+
+    <aside class="side">
+        <ul class="page-links">
+            <li><a href="feed.html"><i class="fa-solid fa-newspaper"></i></a></li>
+            <li><a href="user-profile.html"><i class="fa-solid fa-user"></i></a></li>
+            <li><a href="create-post.html"><i class="fa-solid fa-note-sticky"></i></a></li>
+            <li class="logout-item"><a href="#" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></a></li>        </ul>
+    </aside>
+    <script src="../js/global.js"></script>
+    <script src="js/feed.js"></script>
+    <script src="js/search.js"></script>
+    <div id="logout-confirm" class="confirm hidden">
+        <div class="confirm-card">
+            <h3>Logout</h3>
+            <p>Are you sure you want to logout?</p>
+            <div class="confirm-actions">
+                <button id="cancel-logout" class="btn-secondary">Cancel</button>
+                <button id="confirm-logout" class="btn-danger">Logout</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

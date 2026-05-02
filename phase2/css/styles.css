@@ -1446,35 +1446,78 @@ option:not([value=""]) {
   font-size: 0.82rem;
   margin: 0;
 }
-.following-card {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    width: 67.5%;
-    background-color: var(--color-surface);
+/* Following row - above feed posts */
+.following-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 12px 8px 16px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  scrollbar-width: none;
+}
+
+.following-row::-webkit-scrollbar {
+  display: none;
+}
+
+.following-row-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.following-row-item img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-accent);
+  padding: 2px;
+}
+
+.following-row-item span {
+  font-size: 0.72rem;
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+/* .following-card {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 67.5%;
+  background-color: var(--color-surface);
 }
 
 .following-list {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .following-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
 }
 
 .following-pfp {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 5px;
-}
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
+} */
 
 /* Tablet View */
 @media (min-width: 768px) {

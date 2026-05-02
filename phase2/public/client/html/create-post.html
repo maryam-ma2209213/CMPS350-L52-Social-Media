@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Post</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://kit.fontawesome.com/05b76dde2a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="memory">
+        <div class="sides">
+            <div class="mem-pic">
+                <p class="attachTrigger"><i class="fa-solid fa-camera-retro"></i>Attach your memories</p>
+                <input type="file" id="pictureUpload" accept="image/*" style="display:none;">
+            </div>
+            <div class="mem-line">
+                <p><i class="fa-solid fa-feather-pointed"></i>Write a memorable line</p>
+            </div>
+        </div>
+        <article class="feed-card">
+            <div class="post-top">
+                <div class="user">
+                    <img class="userPfpImage" src="media/emptypfp.jpg" alt="user profile pictrue">
+                    <h6 class="post-owner">Username</h6>
+                </div>
+            </div>
+            <div class="post-content">
+                <img src="media/emptypfp.jpg" alt="post content picture" id="postPicture">
+            </div>
+            <div id="postCaption">
+                <textarea name="caption" id="caption" placeholder="Write about your day..."
+                    style="display: none;"></textarea>
+            </div>
+        </article>
+    </div>
+    <div class="buttons">
+        <button id="submit" type="submit" value="create">Create Post</button>
+        <button id="reset" type="reset" value="discard">Discard Changes</button>
+    </div>
+
+
+    <aside class="side">
+        <ul class="page-links">
+            <li><a href="feed.html"><i class="fa-solid fa-newspaper"></i></a></li>
+            <li><a href="user-profile.html"><i class="fa-solid fa-user"></i></a></li>
+            <li><a href="create-post.html"><i class="fa-solid fa-note-sticky"></i></a></li>
+        </ul>
+    </aside>
+    <script src="js/create-post.js"></script>
+    <script src="js/search.js"></script>
+</body>
+
+</html>

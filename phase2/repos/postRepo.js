@@ -9,18 +9,30 @@ import prisma from "@/lib/prisma";
 class postRepo {
     // get all posts
     async getAll() {
-        return await prisma.post.findMany();
+        return await prisma.post.findMany({
+            orderBy: { createdAt: "desc" },
+            include: {
+                author: {
+                    select: { id: true, username: true, avatar: true }
+                }
+            }
+        });
     }
 
     // get post by id
     async getById(id) {
         return await prisma.post.findUnique({
-            where: { id: Number(id) }, include: {
+            where: { id: Number(id) },
+            include: {
+                author: {
+                    select: { id: true, username: true, avatar: true }
+                },
                 comments: true,
                 likes: true,
             }
         })
     }
+
     // create new post
     async createNewPost(data) {
         return await prisma.post.create({
@@ -31,6 +43,7 @@ class postRepo {
             }
         });
     }
+
     // edit post
     async update(id, data) {
         return await prisma.post.update({
@@ -41,13 +54,11 @@ class postRepo {
             }
         })
     }
-    //delete post
+
+    // delete post
     async deletePost(id) {
         return await prisma.post.delete({ where: { id: Number(id) } })
     }
-
 }
 
 export default new postRepo();
-
-

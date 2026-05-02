@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <main class="auth-layout">
+        <section class="auth-section">
+            <div class="banner-content">
+                <img src="media/logo.png" alt="CAMDEE" class="platform-logo">
+                <p class="platform-slogan">Connect with Friends</p>
+            </div>
+        </section>
+        <section class="register-section">
+            <div class="form-card">
+                <header class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Start your journey</p>
+                </header>
+                <form id="register-form" class="forms">
+                    <!-- <label for="username">Username</label> --> 
+                    <div class="input-style"> 
+                        <input type="text" id="username" name="username" required placeholder="Username"> 
+                    </div> 
+                    <div class="input-style">
+                        <input type="email" id="email" required placeholder="Email">
+                    </div>
+                    
+                    <!-- <label for="password">Password</label> --> 
+                    <div class="input-style"> 
+                        <input type="password" id="password" name="password" required placeholder="Password"> 
+                    </div> 
+                    <!-- <label for="confirm-password">Confirm Password</label> --> 
+                    <div class="input-style"> 
+                        <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm Password"> 
+                    </div>
+                    <button type="submit" class="login-btn">Register</button>
+                </form>
+                <footer class="form-footer">
+                    <p>
+                        Already have an account?
+                        <a href="login.html">Login here</a>
+                    </p>
+                </footer>
+            </div>
+        </section>
+    </main>
+    <script src="js/auth.js"></script>
+</body>
+</html>
