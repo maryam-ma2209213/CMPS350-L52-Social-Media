@@ -1,5 +1,4 @@
 import "../css/styles.css";
-import "../css/responsive.css";
 import "./globals.css";
 
 export const metadata = {
