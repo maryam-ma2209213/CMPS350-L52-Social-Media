@@ -9,15 +9,18 @@ import prisma from "@/lib/prisma";
 class postRepo {
     // get all posts
     async getAll() {
-        return await prisma.post.findMany({
-            orderBy: { createdAt: "desc" },
-            include: {
-                author: {
-                    select: { id: true, username: true, avatar: true }
-                }
+    return await prisma.post.findMany({
+        orderBy: { createdAt: "desc" },
+        include: {
+            author: {
+                select: { id: true, username: true, avatar: true }
+            },
+            _count: {
+                select: { likes: true, comments: true }
             }
-        });
-    }
+        }
+    });
+}
 
     // get post by id
     async getById(id) {
@@ -57,8 +60,10 @@ class postRepo {
 
     // delete post
     async deletePost(id) {
-        return await prisma.post.delete({ where: { id: Number(id) } })
-    }
+    await prisma.like.deleteMany({ where: { postId: Number(id) } });
+    await prisma.comment.deleteMany({ where: { postId: Number(id) } });
+    return await prisma.post.delete({ where: { id: Number(id) } });
+}
 }
 
 export default new postRepo();

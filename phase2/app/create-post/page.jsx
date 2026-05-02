@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "../Sidebar/sidebar";
 
@@ -28,16 +28,14 @@ export default function CreatePostPage() {
     setLoading(true);
     const userId = localStorage.getItem("userId");
 
-    const imagePath = imageFile ? `/media/posts/${imageFile.name}` : null;
+    const formData = new FormData();
+    formData.append("authorId", userId);
+    if (caption.trim()) formData.append("caption", caption.trim());
+    if (imageFile) formData.append("image", imageFile);
 
     const res = await fetch("/api/posts", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        caption: caption.trim() || null,
-        image: imagePath,
-        authorId: Number(userId),
-      }),
+      body: formData, // NO Content-Type header — browser sets it with boundary automatically
     });
 
     if (res.ok) {
@@ -55,7 +53,19 @@ export default function CreatePostPage() {
     setImageFile(null);
   }
 
-  const username = typeof window !== "undefined" ? localStorage.getItem("username") : "";
+  const [username, setUsername] = useState("");
+const [avatar, setAvatar] = useState(null);
+
+useEffect(() => {
+  const userId = localStorage.getItem("userId");
+  if (!userId) return;
+  fetch(`/api/users/${userId}`)
+    .then((r) => r.json())
+    .then((data) => {
+      setUsername(data.username || "");
+      setAvatar(data.avatar || null);
+    });
+}, []);
 
   return (
     <>
@@ -87,16 +97,22 @@ export default function CreatePostPage() {
           <article className="feed-card">
             <div className="post-top">
               <div className="user">
-                <img src="/media/emptypfp.jpg" alt="user" className="userPfpImage" />
+                <img src={avatar || "/media/emptypfp.jpg"} alt="user" className="userPfpImage" />
                 <h6 className="post-owner">{username}</h6>
               </div>
             </div>
             <div className="post-content">
-              <img
-                src={preview || "/media/emptypfp.jpg"}
-                alt="post preview"
-                id="postPicture"
-              />
+              {preview ? (
+                <img src={preview} alt="post preview" id="postPicture" />
+              ) : (
+                <div style={{
+                  width: "80%", aspectRatio: "1/1", background: "rgba(0,0,0,0.05)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  borderRadius: 8, margin: "0 auto", cursor: "pointer", color: "var(--color-text-muted)"
+                }} onClick={() => fileRef.current.click()}>
+                  <i className="fa-solid fa-image" style={{ fontSize: "2rem" }} />
+                </div>
+              )}
             </div>
             <div id="postCaption">
               <textarea

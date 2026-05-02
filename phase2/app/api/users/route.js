@@ -6,6 +6,11 @@ export async function GET(request) {
 
     const username = searchParams.get("username");
     const search = searchParams.get("search");
+    const email = searchParams.get("email");
+    if (email) {
+    const users = await userRepo.getByEmail(email);
+    return NextResponse.json(users);
+}
     if (search) {
         const users = await userRepo.searchByName(search);
         return NextResponse.json(users);

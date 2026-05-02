@@ -52,6 +52,11 @@ class userRepo {
             }
         })
     }
+    async getByEmail(email) {
+    return await prisma.user.findMany({
+        where: { email: email }
+    });
+}
 
 }
 

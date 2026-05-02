@@ -15,10 +15,15 @@ export default function LoginPage() {
   e.preventDefault();
   setError("");
   setLoading(true);
+
   try {
-    const res = await fetch(`/api/users?search=${email}`);
+    const res = await fetch(`/api/users?email=${email}`);
     const users = await res.json();
-    const user = users.find((u) => u.email === email && u.password === password);
+
+    const user = users.find(
+      (u) => u.email === email && u.password === password
+    );
+
     if (!user) {
       setError("Invalid email or password");
     } else {
@@ -26,8 +31,8 @@ export default function LoginPage() {
       localStorage.setItem("username", user.username);
       router.push("/feed");
     }
-  } catch {
-    setError("Something went wrong. Try again.");
+  } catch (err) {
+    setError("Something went wrong.");
   } finally {
     setLoading(false);
   }

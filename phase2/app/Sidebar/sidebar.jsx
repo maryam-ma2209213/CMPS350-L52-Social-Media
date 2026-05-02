@@ -93,26 +93,6 @@ export default function Sidebar() {
           </div>
         </div>
 
-        {/* Following card */}
-        {following.length > 0 && (
-          <div className="following-card">
-            <p style={{ fontSize: "0.78rem", marginBottom: 8, opacity: 0.7 }}>Following</p>
-            <div className="following-list">
-              {following.map((f) => {
-                const user = f.following;
-                if (!user) return null;
-                return (
-                  <Link key={user.id} href={`/profile/${user.id}`} className="following-item"
-                    style={{ textDecoration: "none", color: "inherit" }}>
-                    <img src={user.avatar || "/media/emptypfp.jpg"} alt={user.username} className="following-pfp" />
-                    <span>{user.username}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
         <ul className="page-links">
           <li><Link href="/feed"><i className="fa-solid fa-newspaper"></i></Link></li>
           <li><Link href="/profile"><i className="fa-solid fa-user"></i></Link></li>

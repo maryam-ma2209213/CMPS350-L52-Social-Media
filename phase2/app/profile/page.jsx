@@ -19,7 +19,7 @@ function UserListModal({ title, users, onClose }) {
               <Link key={user.id} href={`/profile/${user.id}`}
                 onClick={onClose}
                 style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0",
-                  textDecoration: "none", color: "inherit", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+                  textDecoration: "none", color: "inherit", borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
                 <img src={user.avatar || "/media/emptypfp.jpg"} alt={user.username}
                   style={{ width: 38, height: 38, borderRadius: "50%", objectFit: "cover" }} />
                 <span style={{ fontSize: "0.9rem", fontWeight: 600 }}>{user.username}</span>
@@ -35,13 +35,145 @@ function UserListModal({ title, users, onClose }) {
   );
 }
 
+function PostModal({ post, user, onClose, onDelete }) {
+  const [comments, setComments] = useState([]);
+  const [editing, setEditing] = useState(false);
+  const [caption, setCaption] = useState(post.caption || "");
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    fetch(`/api/comments?postId=${post.id}`)
+      .then((r) => r.json())
+      .then(setComments)
+      .catch(() => {});
+  }, [post.id]);
+
+  async function handleSaveCaption() {
+    setSaving(true);
+    await fetch(`/api/posts/${post.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ caption }),
+    });
+    setSaving(false);
+    setEditing(false);
+    post.caption = caption; // update locally so modal reflects change
+  }
+
+  async function handleDelete() {
+    await fetch(`/api/posts/${post.id}`, { method: "DELETE" });
+    onDelete(post.id);
+    onClose();
+  }
+
+  return (
+    <>
+      <div className="post-modal-backdrop" onClick={onClose}>
+        <div className="post-modal" onClick={(e) => e.stopPropagation()}>
+
+          {/* Left: image */}
+          <div className="post-modal-image">
+            {post.image ? (
+              <img src={post.image} alt="post" />
+            ) : (
+              <div className="modal-text-only">{post.caption}</div>
+            )}
+          </div>
+
+          {/* Right: details */}
+          <div className="post-modal-details">
+            <div className="post-modal-header">
+              <img src={user?.avatar || "/media/emptypfp.jpg"} alt="avatar" />
+              <span className="modal-username">{user?.username}</span>
+
+              {/* Edit & Delete icons */}
+              <div style={{ marginLeft: "auto", display: "flex", gap: 12, alignItems: "center" }}>
+                <i
+                  className="fa-regular fa-pen-to-square"
+                  title="Edit caption"
+                  style={{ cursor: "pointer", color: "var(--color-text-muted)", fontSize: "1rem" }}
+                  onClick={() => setEditing((v) => !v)}
+                />
+                <i
+                  className="fa-regular fa-trash-can"
+                  title="Delete post"
+                  style={{ cursor: "pointer", color: "#e74c3c", fontSize: "1rem" }}
+                  onClick={() => setShowDeleteConfirm(true)}
+                />
+                <button className="post-modal-close" onClick={onClose}>✕</button>
+              </div>
+            </div>
+
+            {/* Caption / Edit area */}
+            <div className="post-modal-caption">
+              {editing ? (
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  <textarea
+                    value={caption}
+                    onChange={(e) => setCaption(e.target.value)}
+                    rows={3}
+                    style={{ width: "100%", fontSize: "0.88rem", borderRadius: 6,
+                      border: "1px solid var(--color-border)", padding: 6, resize: "none",
+                      fontFamily: "inherit", color: "var(--color-text-main)", background: "white" }}
+                  />
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button className="btn-secondary" style={{ flex: 1, padding: "6px" }}
+                      onClick={() => setEditing(false)}>Cancel</button>
+                    <button className="btn-danger" style={{ flex: 1, padding: "6px", background: "var(--color-accent)" }}
+                      onClick={handleSaveCaption} disabled={saving}>
+                      {saving ? "Saving..." : "Save"}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                caption && <><strong>{user?.username}</strong> {caption}</>
+              )}
+            </div>
+
+            <div className="post-modal-comments">
+              {comments.length === 0 ? (
+                <p style={{ color: "gray", fontSize: "0.82rem" }}>No comments yet.</p>
+              ) : (
+                comments.map((c) => (
+                  <div key={c.id} className="modal-comment">
+                    <img src={c.author?.avatar || "/media/emptypfp.jpg"} alt="pfp" />
+                    <div className="modal-comment-body">
+                      <strong>{c.author?.username}</strong> {c.content}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Delete confirmation */}
+      {showDeleteConfirm && (
+        <div className="confirm" onClick={() => setShowDeleteConfirm(false)}>
+          <div className="confirm-card" onClick={(e) => e.stopPropagation()}>
+            <h3>Delete Post</h3>
+            <p>Are you sure you want to delete this post?</p>
+            <div className="confirm-actions">
+              <button className="btn-secondary" onClick={() => setShowDeleteConfirm(false)}>Cancel</button>
+              <button className="btn-danger" onClick={handleDelete}>Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 export default function UserProfilePage() {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(null); // "followers" | "following" | null
+  const [modal, setModal] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -60,6 +192,11 @@ export default function UserProfilePage() {
       setLoading(false);
     });
   }, []);
+
+  // Remove deleted post from list without refetching
+  function handlePostDelete(postId) {
+    setPosts((prev) => prev.filter((p) => p.id !== postId));
+  }
 
   if (loading) return <p style={{ textAlign: "center", marginTop: 40 }}>Loading...</p>;
 
@@ -88,14 +225,10 @@ export default function UserProfilePage() {
 
           <div className="posts-followers-following">
             <p><strong>{posts.length}</strong> posts</p>
-            <p
-              style={{ cursor: "pointer" }}
-              onClick={() => setModal("followers")}>
+            <p style={{ cursor: "pointer" }} onClick={() => setModal("followers")}>
               <strong>{followers.length}</strong> followers
             </p>
-            <p
-              style={{ cursor: "pointer" }}
-              onClick={() => setModal("following")}>
+            <p style={{ cursor: "pointer" }} onClick={() => setModal("following")}>
               <strong>{following.length}</strong> following
             </p>
           </div>
@@ -108,7 +241,8 @@ export default function UserProfilePage() {
             <p style={{ textAlign: "center", color: "gray" }}>No posts yet.</p>
           )}
           {posts.map((post) => (
-            <div className="post" key={post.id}>
+            <div className="post" key={post.id} onClick={() => setSelectedPost(post)}
+              style={{ cursor: "pointer" }}>
               {post.image ? (
                 <img src={post.image} alt="post" />
               ) : (
@@ -128,6 +262,15 @@ export default function UserProfilePage() {
           ))}
         </div>
       </main>
+
+      {selectedPost && (
+        <PostModal
+          post={selectedPost}
+          user={user}
+          onClose={() => setSelectedPost(null)}
+          onDelete={handlePostDelete}
+        />
+      )}
 
       {modal === "followers" && (
         <UserListModal title="Followers" users={followers} onClose={() => setModal(null)} />
