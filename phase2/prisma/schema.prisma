@@ -33,7 +33,7 @@ model Post {
   image     String?
   createdAt DateTime  @default(now())
   authorId  Int       @default(1) //default(1) added from lab
-  author    User      @relation(fields: [authorId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id] , onDelete: Cascade)
   comments  Comment[]
   likes     Like[]
 }
@@ -44,7 +44,7 @@ model Comment {
   createdAt DateTime @default(now())
 
   authorId Int  @default(1)
-  author   User @relation(fields: [authorId], references: [id])
+  author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   postId   Int       @default(1)
   post     Post      @relation(fields: [postId], references: [id])
@@ -56,15 +56,15 @@ model Comment {
 model Like {
   id     Int  @id @default(autoincrement())
   userId Int  @default(1)
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   post   Post @relation(fields: [postId], references: [id])
   postId Int
 }
 
 model Follow {
   id          Int  @id @default(autoincrement())
-  follower    User @relation("follower", fields: [followerId], references: [id])
+  follower    User @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
   followerId  Int
-  following   User @relation("following", fields: [followingId], references: [id])
+  following   User @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId Int
 }
